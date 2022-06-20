@@ -6,7 +6,6 @@
   "main": "src/index.js",
   "dependencies": {
     "react": "18.0.0",
-    "react-copy-to-clipboard": "5.1.0",
     "react-dom": "18.0.0",
     "react-scripts": "4.0.0",
     "universal-cookie": "4.0.4"
@@ -21,5 +20,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

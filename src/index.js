@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Cookies from "universal-cookie";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./styles.css";
 
 import box from "./images/Box.jpg";
@@ -10,9 +9,6 @@ import history from "./images/History.png";
 import home from "./images/Home.png";
 import langFR from "./images/LangFR.png";
 import langEN from "./images/LangEN.png";
-import num4 from "./images/4.png";
-import num5 from "./images/5.png";
-import num6 from "./images/6.png";
 
 const imgLang = [langFR, langEN];
 const cookies = new Cookies();
