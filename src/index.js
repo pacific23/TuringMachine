@@ -179,7 +179,7 @@ class App extends React.Component {
     var sizey = window.innerHeight;
     if (sizex < sizey) {
       this.setState({
-        sizeImage: Math.min(sizex * 0.8, sizey / 2),
+        sizeImage: Math.min(sizex * 0.7, sizey / 2),
         landscapeMode: sizex < sizey ? false : true
       });
     } else {
