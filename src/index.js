@@ -18,9 +18,9 @@ var historicalGames;
 var traduction = [
   [
     "FR",
-    "PARTIE RAPIDE",
-    "PARTIE DU JOUR",
-    "PARTIE AVANCEE",
+    "JOUER",
+    "DEFI DU JOUR",
+    "PARTIE PERSONNALISEE",
     "A PROPOS",
     "CHARGER",
     "IMPOSSIBLE DE CHARGER UNE PARTIE",
@@ -46,9 +46,9 @@ var traduction = [
   ],
   [
     "EN",
-    "QUICK GAME",
+    "PLAY",
     "GAME OF THE DAY",
-    "ADVANCED GAME",
+    "CUSTOM GAME",
     "ABOUT",
     "LOAD",
     "UNABLE TO LOAD GAME",
@@ -409,9 +409,9 @@ class App extends React.Component {
                   >
                     <img src={home} width="20" alt="home" />
                   </button>
+                  <div className="scrollmenu">{this.getListHistorical()}</div>
                 </td>
               </tr>
-              <div className="scrollmenu">{this.getListHistorical()}</div>
             </tbody>
           </table>
         </div>
@@ -462,7 +462,7 @@ class App extends React.Component {
 
   getListHistorical() {
     return historicalGames.map((hash) => (
-      <div>
+      <div key={"#" + hash}>
         <input
           className="button"
           type="button"
@@ -617,7 +617,7 @@ class App extends React.Component {
       <table className="mainTab">
         <tbody>
           <tr>
-            <td colspan={this.game.n}>
+            <td colSpan={this.game.n}>
               <button
                 id="homeBut"
                 className="smallButton"
@@ -732,7 +732,7 @@ class App extends React.Component {
           </tr>
           {this.game.m === 2 ? (
             <tr>
-              <td colspan={this.game.n}>
+              <td colSpan={this.game.n}>
                 <input
                   className="indS"
                   type="button"
@@ -772,7 +772,7 @@ class App extends React.Component {
           ) : null}
           <tr>
             {this.state.page === 4 ? (
-              <td colspan={this.game.n}>
+              <td colSpan={this.game.n}>
                 <input
                   className="smallButton"
                   type="button"
@@ -781,7 +781,7 @@ class App extends React.Component {
                 />
               </td>
             ) : (
-              <td colspan={this.game.n}>
+              <td colSpan={this.game.n}>
                 <input
                   className="smallButton"
                   type="button"
@@ -818,7 +818,7 @@ class App extends React.Component {
       <table className="mainTab">
         <tbody>
           <tr>
-            <td colspan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
+            <td colSpan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
               <button
                 id="homeBut"
                 className="smallButton"
@@ -952,7 +952,7 @@ class App extends React.Component {
           ) : null}
           {this.game.m === 2 ? (
             <tr>
-              <td colspan="2">
+              <td colSpan="2">
                 <input
                   className="indS"
                   type="button"
@@ -992,7 +992,7 @@ class App extends React.Component {
           ) : null}
           <tr>
             {this.state.page === 4 ? (
-              <td colspan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
+              <td colSpan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
                 <input
                   className="smallButton"
                   type="button"
@@ -1001,7 +1001,7 @@ class App extends React.Component {
                 />
               </td>
             ) : (
-              <td colspan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
+              <td colSpan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
                 <input
                   className="smallButton"
                   type="button"
@@ -1038,7 +1038,7 @@ class App extends React.Component {
       <table className="mainTab">
         <tbody>
           <tr>
-            <td colspan={this.game.n}>
+            <td colSpan={this.game.n}>
               <button
                 id="homeBut"
                 className="smallButton"
@@ -1051,7 +1051,7 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td colspan={this.game.n}>
+            <td colSpan={this.game.n}>
               {traduction[this.state.language][25] + " : " + this.game.code}
             </td>
           </tr>
@@ -1148,7 +1148,7 @@ class App extends React.Component {
             ) : null}
           </tr>
           <tr>
-            <td colspan={this.game.n}>
+            <td colSpan={this.game.n}>
               <input
                 className="smallButton"
                 type="button"
@@ -1167,7 +1167,7 @@ class App extends React.Component {
       <table className="mainTab">
         <tbody>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               <button
                 id="homeBut"
                 className="smallButton"
@@ -1180,13 +1180,13 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               {traduction[this.state.language][25] + " : " + this.game.code}
             </td>
           </tr>
           <tr>
             <td id="spot">A</td>
-            <td colspan="2">
+            <td colSpan="2">
               <button
                 id="solBut"
                 className="solButton"
@@ -1202,7 +1202,7 @@ class App extends React.Component {
           </tr>
           <tr>
             <td id="spot">B</td>
-            <td colspan="2">
+            <td colSpan="2">
               <button
                 id="solBut"
                 className="solButton"
@@ -1218,7 +1218,7 @@ class App extends React.Component {
           </tr>
           <tr>
             <td id="spot">C</td>
-            <td colspan="2">
+            <td colSpan="2">
               <button
                 id="solBut"
                 className="solButton"
@@ -1234,7 +1234,7 @@ class App extends React.Component {
           </tr>
           <tr>
             <td id="spot">D</td>
-            <td colspan="2">
+            <td colSpan="2">
               <button
                 id="solBut"
                 className="solButton"
@@ -1251,7 +1251,7 @@ class App extends React.Component {
           {this.game.n > 4 ? (
             <tr>
               <td id="spot">E</td>
-              <td colspan="2">
+              <td colSpan="2">
                 <button
                   id="solBut"
                   className="solButton"
@@ -1269,7 +1269,7 @@ class App extends React.Component {
           {this.game.n > 5 ? (
             <tr>
               <td id="spot">F</td>
-              <td colspan="2">
+              <td colSpan="2">
                 <button
                   id="solBut"
                   className="solButton"
@@ -1285,7 +1285,7 @@ class App extends React.Component {
             </tr>
           ) : null}
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               <input
                 className="smallButton"
                 type="button"
