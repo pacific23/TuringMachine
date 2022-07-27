@@ -179,7 +179,7 @@ class App extends React.Component {
     var sizey = window.innerHeight;
     if (sizex < sizey) {
       this.setState({
-        sizeImage: Math.min(sizex * 0.9, sizey / 2),
+        sizeImage: Math.min(sizex * 0.8, sizey / 2),
         landscapeMode: sizex < sizey ? false : true
       });
     } else {
@@ -1427,7 +1427,12 @@ class App extends React.Component {
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
-              <img src={box} width={this.state.sizeImage} alt="tm" />
+              <img
+                src={box}
+                width={this.state.sizeImage}
+                height="auto"
+                alt="tm"
+              />
               <br />
               {this.getOptionMenu()}
             </td>
@@ -1464,7 +1469,12 @@ class App extends React.Component {
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
-              <img src={box} width={this.state.sizeImage} alt="tm" />
+              <img
+                src={box}
+                width={this.state.sizeImage}
+                height="auto"
+                alt="tm"
+              />
             </td>
           </tr>
           <tr>
