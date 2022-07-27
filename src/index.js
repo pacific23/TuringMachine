@@ -97,7 +97,7 @@ class App extends React.Component {
     ind: [0, 0, 0, 0, 0, 0],
     law: [0, 0, 0, 0, 0, 0],
     crypt: [0, 0, 0, 0, 0, 0],
-    sortedCrypt: [0, 0, 0, 0, 0, 0]
+    sortedInd: [0, 0, 0, 0, 0, 0]
   };
 
   componentDidMount() {
@@ -214,9 +214,9 @@ class App extends React.Component {
     }
   }
 
-  sortCrypt() {
-    this.game.sortCrypt = [...this.game.crypt];
-    this.game.sortCrypt.sort();
+  sortInd() {
+    this.game.sortedInd = [...this.game.ind];
+    this.game.sortedInd.sort((a, b) => (a > b ? 1 : -1));
   }
 
   loadGame(url) {
@@ -248,7 +248,7 @@ class App extends React.Component {
           this.shuffleIndFake();
         }
         if (this.game.m == 2) {
-          this.sortCrypt();
+          this.sortInd();
         }
         this.setState({ page: 4 });
       } else {
@@ -622,30 +622,33 @@ class App extends React.Component {
           {this.game.n > 4 ? <td id="spot">E</td> : null}
           {this.game.n > 5 ? <td id="spot">F</td> : null}
         </tr>
-        <tr>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[0]} />
-          </td>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[1]} />
-          </td>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[2]} />
-          </td>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[3]} />
-          </td>
-          {this.game.n > 4 ? (
+        {this.game.m != 2 ? (
+          <tr>
             <td>
-              <input class="ind" type="button" value={this.game.ind[4]} />
+              <input class="ind" type="button" value={this.game.ind[0]} />
             </td>
-          ) : null}
-          {this.game.n > 5 ? (
             <td>
-              <input class="ind" type="button" value={this.game.ind[5]} />
+              <input class="ind" type="button" value={this.game.ind[1]} />
             </td>
-          ) : null}
-        </tr>
+            <td>
+              <input class="ind" type="button" value={this.game.ind[2]} />
+            </td>
+            <td>
+              <input class="ind" type="button" value={this.game.ind[3]} />
+            </td>
+            {this.game.n > 4 ? (
+              <td>
+                <input class="ind" type="button" value={this.game.ind[4]} />
+              </td>
+            ) : null}
+            {this.game.n > 5 ? (
+              <td>
+                <input class="ind" type="button" value={this.game.ind[5]} />
+              </td>
+            ) : null}
+          </tr>
+        ) : null}
+
         {this.game.m == 1 ? (
           <tr>
             <td>
@@ -672,25 +675,54 @@ class App extends React.Component {
             ) : null}
           </tr>
         ) : null}
+        <tr id={"color" + this.game.color}>
+          <td>{this.game.crypt[0]}</td>
+          <td>{this.game.crypt[1]}</td>
+          <td>{this.game.crypt[2]}</td>
+          <td>{this.game.crypt[3]}</td>
+          {this.game.n > 4 ? <td>{this.game.crypt[4]}</td> : null}
+          {this.game.n > 5 ? <td>{this.game.crypt[5]}</td> : null}
+        </tr>
         {this.game.m == 2 ? (
-          <tr id={"color" + this.game.color}>
+          <tr>
             <td colspan={this.game.n}>
-              {this.game.sortCrypt[0]} {this.game.sortCrypt[1]}{" "}
-              {this.game.sortCrypt[2]} {this.game.sortCrypt[3]}
-              {this.game.n > 4 ? " " + this.game.sortCrypt[4] : null}
-              {this.game.n > 5 ? " " + this.game.sortCrypt[5] : null}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[0]}
+              />{" "}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[1]}
+              />{" "}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[2]}
+              />{" "}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[3]}
+              />{" "}
+              {this.game.n > 4 ? (
+                <input
+                  class="indS"
+                  type="button"
+                  value={this.game.sortedInd[4]}
+                />
+              ) : null}{" "}
+              {this.game.n > 5 ? (
+                <input
+                  class="indS"
+                  type="button"
+                  value={this.game.sortedInd[5]}
+                />
+              ) : null}
             </td>
           </tr>
-        ) : (
-          <tr id={"color" + this.game.color}>
-            <td>{this.game.crypt[0]}</td>
-            <td>{this.game.crypt[1]}</td>
-            <td>{this.game.crypt[2]}</td>
-            <td>{this.game.crypt[3]}</td>
-            {this.game.n > 4 ? <td>{this.game.crypt[4]}</td> : null}
-            {this.game.n > 5 ? <td>{this.game.crypt[5]}</td> : null}
-          </tr>
-        )}
+        ) : null}
         <tr>
           {this.state.page == 4 ? (
             <td colspan={this.game.n}>
@@ -751,99 +783,129 @@ class App extends React.Component {
         </tr>
         <tr>
           <td id="spot">A</td>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[0]} />
-          </td>
+          {this.game.m != 2 ? (
+            <td>
+              <input class="ind" type="button" value={this.game.ind[0]} />
+            </td>
+          ) : null}
           {this.game.m == 1 ? (
             <td>
               <input class="ind" type="button" value={this.game.fake[0]} />
             </td>
           ) : null}
-          {this.game.m != 2 ? (
-            <td id={"color" + this.game.color}>{this.game.crypt[0]}</td>
-          ) : null}
+          <td id={"color" + this.game.color}>{this.game.crypt[0]}</td>
         </tr>
         <tr>
           <td id="spot">B</td>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[1]} />
-          </td>
+          {this.game.m != 2 ? (
+            <td>
+              <input class="ind" type="button" value={this.game.ind[1]} />
+            </td>
+          ) : null}
           {this.game.m == 1 ? (
             <td>
               <input class="ind" type="button" value={this.game.fake[1]} />
             </td>
           ) : null}
-          {this.game.m != 2 ? (
-            <td id={"color" + this.game.color}>{this.game.crypt[1]}</td>
-          ) : null}
+          <td id={"color" + this.game.color}>{this.game.crypt[1]}</td>
         </tr>
         <tr>
           <td id="spot">C</td>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[2]} />
-          </td>
+          {this.game.m != 2 ? (
+            <td>
+              <input class="ind" type="button" value={this.game.ind[2]} />
+            </td>
+          ) : null}
           {this.game.m == 1 ? (
             <td>
               <input class="ind" type="button" value={this.game.fake[2]} />
             </td>
           ) : null}
-          {this.game.m != 2 ? (
-            <td id={"color" + this.game.color}>{this.game.crypt[2]}</td>
-          ) : null}
+          <td id={"color" + this.game.color}>{this.game.crypt[2]}</td>
         </tr>
         <tr>
           <td id="spot">D</td>
-          <td>
-            <input class="ind" type="button" value={this.game.ind[3]} />
-          </td>
+          {this.game.m != 2 ? (
+            <td>
+              <input class="ind" type="button" value={this.game.ind[3]} />
+            </td>
+          ) : null}
           {this.game.m == 1 ? (
             <td>
               <input class="ind" type="button" value={this.game.fake[3]} />
             </td>
           ) : null}
-          {this.game.m != 2 ? (
-            <td id={"color" + this.game.color}>{this.game.crypt[3]}</td>
-          ) : null}
+          <td id={"color" + this.game.color}>{this.game.crypt[3]}</td>
         </tr>
         {this.game.n > 4 ? (
           <tr>
             <td id="spot">E</td>
-            <td>
-              <input class="ind" type="button" value={this.game.ind[4]} />
-            </td>
+            {this.game.m != 2 ? (
+              <td>
+                <input class="ind" type="button" value={this.game.ind[4]} />
+              </td>
+            ) : null}
             {this.game.m == 1 ? (
               <td>
                 <input class="ind" type="button" value={this.game.fake[4]} />
               </td>
             ) : null}
-            {this.game.m != 2 ? (
-              <td id={"color" + this.game.color}>{this.game.crypt[4]}</td>
-            ) : null}
+            <td id={"color" + this.game.color}>{this.game.crypt[4]}</td>
           </tr>
         ) : null}
         {this.game.n > 5 ? (
           <tr>
             <td id="spot">F</td>
-            <td>
-              <input class="ind" type="button" value={this.game.ind[5]} />
-            </td>
+            {this.game.m != 2 ? (
+              <td>
+                <input class="ind" type="button" value={this.game.ind[5]} />
+              </td>
+            ) : null}
             {this.game.m == 1 ? (
               <td>
                 <input class="ind" type="button" value={this.game.fake[5]} />
               </td>
             ) : null}
-            {this.game.m != 2 ? (
-              <td id={"color" + this.game.color}>{this.game.crypt[5]}</td>
-            ) : null}
+            <td id={"color" + this.game.color}>{this.game.crypt[5]}</td>
           </tr>
         ) : null}
         {this.game.m == 2 ? (
-          <tr id={"color" + this.game.color}>
+          <tr>
             <td colspan="2">
-              {this.game.sortCrypt[0]} {this.game.sortCrypt[1]}{" "}
-              {this.game.sortCrypt[2]} {this.game.sortCrypt[3]}
-              {this.game.n > 4 ? " " + this.game.sortCrypt[4] : null}
-              {this.game.n > 5 ? " " + this.game.sortCrypt[5] : null}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[0]}
+              />{" "}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[1]}
+              />{" "}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[2]}
+              />{" "}
+              <input
+                class="indS"
+                type="button"
+                value={this.game.sortedInd[3]}
+              />{" "}
+              {this.game.n > 4 ? (
+                <input
+                  class="indS"
+                  type="button"
+                  value={this.game.sortedInd[4]}
+                />
+              ) : null}{" "}
+              {this.game.n > 5 ? (
+                <input
+                  class="indS"
+                  type="button"
+                  value={this.game.sortedInd[5]}
+                />
+              ) : null}
             </td>
           </tr>
         ) : null}
