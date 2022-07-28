@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import Cookies from "universal-cookie";
 import "./styles.css";
 
+import PrintIcon from "@mui/icons-material/Print";
+
 import box from "./images/Box.jpg";
 import number from "./images/Number.png";
 import history from "./images/History.png";
@@ -17,60 +19,62 @@ var userID = "";
 var historicalGames;
 var traduction = [
   [
-    "FR",
-    "JOUER",
-    "DEFI DU JOUR",
-    "PARTIE PERSONNALISEE",
-    "A PROPOS",
-    "CHARGER",
-    "IMPOSSIBLE DE CHARGER UNE PARTIE",
-    "COMPETITIF",
-    "SOLO / COOP",
-    "CLASSIQUE",
-    "EXTREME",
-    "CAUCHEMAR",
-    "FACILE",
-    "MOYEN",
-    "DIFFICILE",
-    "4",
-    "5",
-    "6",
-    "JOUER",
-    "CHARGEMENT...",
-    "SOLUTION",
-    "RETOUR",
-    "VOIR LA SOLUTION ?",
-    "OUI",
-    "NON",
-    "CODE"
+    "FR", // 0
+    "JOUER", // 1
+    "DEFI DU JOUR", // 2
+    "PARTIE PERSONNALISEE", // 3
+    "A PROPOS", // 4
+    "CHARGER", // 5
+    "IMPOSSIBLE DE CHARGER UNE PARTIE", // 6
+    "COMPETITIF", // 7
+    "SOLO / COOP", // 8
+    "CLASSIQUE", // 9
+    "EXTREME", // 10
+    "CAUCHEMAR", // 11
+    "FACILE", // 12
+    "MOYEN", // 13
+    "DIFFICILE", // 14
+    "4", // 15
+    "5", // 16
+    "6", // 17
+    "JOUER", // 18
+    "CHARGEMENT...", // 19
+    "SOLUTION", // 20
+    "RETOUR", // 21
+    "VOIR LA SOLUTION ?", // 22
+    "OUI", // 23
+    "NON", // 24
+    "CODE", // 25
+    "FEUILLE DE NOTES" // 26
   ],
   [
-    "EN",
-    "PLAY",
-    "GAME OF THE DAY",
-    "CUSTOM GAME",
-    "ABOUT",
-    "LOAD",
-    "UNABLE TO LOAD GAME",
-    "COMPETITIVE",
-    "SOLO / COOP",
-    "CLASSIC",
-    "EXTREME",
-    "NIGHTMARE",
-    "EASY",
-    "MIDDLE",
-    "HARD",
-    "4",
-    "5",
-    "6",
-    "PLAY",
-    "LOADING...",
-    "SOLUTION",
-    "BACK",
-    "SHOW SOLUTION?",
-    "YES",
-    "NO",
-    "CODE"
+    "EN", // 0
+    "PLAY", // 1
+    "GAME OF THE DAY", // 2
+    "CUSTOM GAME", // 3
+    "ABOUT", // 4
+    "LOAD", // 5
+    "UNABLE TO LOAD GAME", // 6
+    "COMPETITIVE", // 7
+    "SOLO / COOP", // 8
+    "CLASSIC", // 9
+    "EXTREME", // 10
+    "NIGHTMARE", // 11
+    "EASY", // 12
+    "MIDDLE", // 13
+    "HARD", // 14
+    "4", // 15
+    "5", // 16
+    "6", // 17
+    "PLAY", // 18
+    "LOADING...", // 19
+    "SOLUTION", // 20
+    "BACK", // 21
+    "SHOW SOLUTION?", // 22
+    "YES", // 23
+    "NO", // 24
+    "CODE", // 25
+    "NOTE SHEET" // 26
   ]
 ];
 
@@ -512,6 +516,17 @@ class App extends React.Component {
                           value={traduction[this.state.language][3]}
                           onClick={() => this.advancedGame()}
                         />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button className="button" type="button">
+                          <PrintIcon />
+                          &nbsp;
+                          {traduction[this.state.language][26]}
+                          &nbsp;
+                          <PrintIcon />
+                        </button>
                       </td>
                     </tr>
                   </tbody>
