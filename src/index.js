@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import Cookies from "universal-cookie";
 import "./styles.css";
+import traduction from "./language";
 
 import PrintIcon from "@mui/icons-material/Print";
 
@@ -17,66 +18,6 @@ const cookies = new Cookies();
 
 var userID = "";
 var historicalGames;
-var traduction = [
-  [
-    "FR", // 0
-    "JOUER", // 1
-    "DEFI DU JOUR", // 2
-    "PARTIE PERSONNALISEE", // 3
-    "A PROPOS", // 4
-    "CHARGER", // 5
-    "IMPOSSIBLE DE CHARGER UNE PARTIE", // 6
-    "COMPETITIF", // 7
-    "SOLO / COOP", // 8
-    "CLASSIQUE", // 9
-    "EXTREME", // 10
-    "CAUCHEMAR", // 11
-    "FACILE", // 12
-    "MOYEN", // 13
-    "DIFFICILE", // 14
-    "4", // 15
-    "5", // 16
-    "6", // 17
-    "JOUER", // 18
-    "CHARGEMENT...", // 19
-    "SOLUTION", // 20
-    "RETOUR", // 21
-    "VOIR LA SOLUTION ?", // 22
-    "OUI", // 23
-    "NON", // 24
-    "CODE", // 25
-    "FEUILLE DE NOTES" // 26
-  ],
-  [
-    "EN", // 0
-    "PLAY", // 1
-    "GAME OF THE DAY", // 2
-    "CUSTOM GAME", // 3
-    "ABOUT", // 4
-    "LOAD", // 5
-    "UNABLE TO LOAD GAME", // 6
-    "COMPETITIVE", // 7
-    "SOLO / COOP", // 8
-    "CLASSIC", // 9
-    "EXTREME", // 10
-    "NIGHTMARE", // 11
-    "EASY", // 12
-    "MIDDLE", // 13
-    "HARD", // 14
-    "4", // 15
-    "5", // 16
-    "6", // 17
-    "PLAY", // 18
-    "LOADING...", // 19
-    "SOLUTION", // 20
-    "BACK", // 21
-    "SHOW SOLUTION?", // 22
-    "YES", // 23
-    "NO", // 24
-    "CODE", // 25
-    "NOTE SHEET" // 26
-  ]
-];
 
 class App extends React.Component {
   state = {
@@ -84,7 +25,7 @@ class App extends React.Component {
     sizeImage: 1,
     page: 0,
     historicalData: false,
-    language: 0,
+    language: 1,
     hashValue: "",
     advancedSettings: [0, 0, 1, 1]
   };
@@ -359,7 +300,7 @@ class App extends React.Component {
           <table className="mainTab">
             <tbody>
               <tr>
-                <td>{traduction[this.state.language][19]}</td>
+                <td>{traduction[this.state.language]["LOADING"]}</td>
               </tr>
             </tbody>
           </table>
@@ -390,7 +331,7 @@ class App extends React.Component {
                   >
                     <img src={home} width="20" alt="home" />
                   </button>
-                  {traduction[this.state.language][6]}
+                  {traduction[this.state.language]["ERROR_UNABLE"]}
                 </td>
               </tr>
             </tbody>
@@ -493,7 +434,7 @@ class App extends React.Component {
                         <input
                           className="button"
                           type="button"
-                          value={traduction[this.state.language][1]}
+                          value={traduction[this.state.language]["QUICK"]}
                           onClick={() => this.quickGame()}
                         />
                       </td>
@@ -503,7 +444,7 @@ class App extends React.Component {
                         <input
                           className="button"
                           type="button"
-                          value={traduction[this.state.language][2]}
+                          value={traduction[this.state.language]["DAY"]}
                           onClick={() => this.gameOfTheDay()}
                         />
                       </td>
@@ -513,7 +454,7 @@ class App extends React.Component {
                         <input
                           className="button"
                           type="button"
-                          value={traduction[this.state.language][3]}
+                          value={traduction[this.state.language]["CUSTOM"]}
                           onClick={() => this.advancedGame()}
                         />
                       </td>
@@ -523,7 +464,7 @@ class App extends React.Component {
                         <button className="button" type="button">
                           <PrintIcon />
                           &nbsp;
-                          {traduction[this.state.language][26]}
+                          {traduction[this.state.language]["SHEET"]}
                           &nbsp;
                           <PrintIcon />
                         </button>
@@ -552,7 +493,7 @@ class App extends React.Component {
                         <input
                           className="button"
                           type="button"
-                          value={traduction[this.state.language][5]}
+                          value={traduction[this.state.language]["LOAD"]}
                           onClick={() => this.hashGame()}
                         />
                       </td>
@@ -581,7 +522,7 @@ class App extends React.Component {
         <input
           className="smallButton"
           type="button"
-          value={traduction[this.state.language][4]}
+          value={traduction[this.state.language]["ABOUT"]}
           onClick={() => this.clickAbout()}
         />
         &nbsp;
@@ -791,7 +732,7 @@ class App extends React.Component {
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][20]}
+                  value={traduction[this.state.language]["SOLUTION"]}
                   onClick={() => this.clickSolution()}
                 />
               </td>
@@ -800,7 +741,7 @@ class App extends React.Component {
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][24]}
+                  value={traduction[this.state.language]["NO"]}
                   onClick={() => {
                     this.setState({ page: 4 });
                   }}
@@ -809,13 +750,13 @@ class App extends React.Component {
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][22]}
+                  value={traduction[this.state.language]["SHOW_SOLUTION"]}
                 />
                 &nbsp;
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][23]}
+                  value={traduction[this.state.language]["YES"]}
                   onClick={() => {
                     this.setState({ page: 10 });
                   }}
@@ -1011,7 +952,7 @@ class App extends React.Component {
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][20]}
+                  value={traduction[this.state.language]["SOLUTION"]}
                   onClick={() => this.clickSolution()}
                 />
               </td>
@@ -1020,7 +961,7 @@ class App extends React.Component {
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][24]}
+                  value={traduction[this.state.language]["NO"]}
                   onClick={() => {
                     this.setState({ page: 4 });
                   }}
@@ -1029,13 +970,13 @@ class App extends React.Component {
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][22]}
+                  value={traduction[this.state.language]["SHOW_SOLUTION"]}
                 />
                 &nbsp;
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language][23]}
+                  value={traduction[this.state.language]["YES"]}
                   onClick={() => {
                     this.setState({ page: 10 });
                   }}
@@ -1067,7 +1008,7 @@ class App extends React.Component {
           </tr>
           <tr>
             <td colSpan={this.game.n}>
-              {traduction[this.state.language][25] + " : " + this.game.code}
+              {traduction[this.state.language]["CODE"] + " : " + this.game.code}
             </td>
           </tr>
           <tr>
@@ -1167,7 +1108,7 @@ class App extends React.Component {
               <input
                 className="smallButton"
                 type="button"
-                value={traduction[this.state.language][21]}
+                value={traduction[this.state.language]["BACK"]}
                 onClick={() => this.setState({ page: 4 })}
               />
             </td>
@@ -1196,7 +1137,7 @@ class App extends React.Component {
           </tr>
           <tr>
             <td colSpan="3">
-              {traduction[this.state.language][25] + " : " + this.game.code}
+              {traduction[this.state.language]["CODE"] + " : " + this.game.code}
             </td>
           </tr>
           <tr>
@@ -1304,7 +1245,7 @@ class App extends React.Component {
               <input
                 className="smallButton"
                 type="button"
-                value={traduction[this.state.language][21]}
+                value={traduction[this.state.language]["BACK"]}
                 onClick={() => this.setState({ page: 4 })}
               />
             </td>
@@ -1330,30 +1271,30 @@ class App extends React.Component {
                   <img src={home} width="20" alt="home" />
                 </button>
               ) : null}
-              {this.getAdvancedButton(0, 0, 7)}
+              {this.getAdvancedButton(0, 0, "COMPETITIVE")}
             </td>
-            <td>{this.getAdvancedButton(1, 0, 9)}</td>
-            <td>{this.getAdvancedButton(2, 0, 12)}</td>
-            <td>{this.getAdvancedButton(3, 0, 15)}</td>
+            <td>{this.getAdvancedButton(1, 0, "CLASSIC")}</td>
+            <td>{this.getAdvancedButton(2, 0, "EASY")}</td>
+            <td>{this.getAdvancedButton(3, 0, "V4")}</td>
             <td></td>
           </tr>
           <tr>
-            <td>{this.getAdvancedButton(0, 1, 8)}</td>
-            <td>{this.getAdvancedButton(1, 1, 10)}</td>
-            <td>{this.getAdvancedButton(2, 1, 13)}</td>
-            <td>{this.getAdvancedButton(3, 1, 16)}</td>
+            <td>{this.getAdvancedButton(0, 1, "SOLO")}</td>
+            <td>{this.getAdvancedButton(1, 1, "EXTREME")}</td>
+            <td>{this.getAdvancedButton(2, 1, "MEDIUM")}</td>
+            <td>{this.getAdvancedButton(3, 1, "V5")}</td>
             <td></td>
           </tr>
           <tr>
             <td></td>
-            <td>{this.getAdvancedButton(1, 2, 11)}</td>
-            <td>{this.getAdvancedButton(2, 2, 14)}</td>
-            <td>{this.getAdvancedButton(3, 2, 17)}</td>
+            <td>{this.getAdvancedButton(1, 2, "NIGHTMARE")}</td>
+            <td>{this.getAdvancedButton(2, 2, "HARD")}</td>
+            <td>{this.getAdvancedButton(3, 2, "V6")}</td>
             <td>
               <input
                 className="advButton"
                 type="button"
-                value={traduction[this.state.language][18]}
+                value={traduction[this.state.language]["PLAY"]}
                 onClick={() => this.playAdvanced()}
               />
             </td>
@@ -1379,25 +1320,25 @@ class App extends React.Component {
                   <img src={home} width="20" alt="home" />
                 </button>
               ) : null}
-              {this.getAdvancedButton(0, 0, 7)}
+              {this.getAdvancedButton(0, 0, "COMPETITIVE")}
             </td>
-            <td>{this.getAdvancedButton(0, 1, 8)}</td>
+            <td>{this.getAdvancedButton(0, 1, "SOLO")}</td>
             <td></td>
           </tr>
           <tr>
-            <td>{this.getAdvancedButton(1, 0, 9)}</td>
-            <td>{this.getAdvancedButton(1, 1, 10)}</td>
-            <td>{this.getAdvancedButton(1, 2, 11)}</td>
+            <td>{this.getAdvancedButton(1, 0, "CLASSIC")}</td>
+            <td>{this.getAdvancedButton(1, 1, "EXTREME")}</td>
+            <td>{this.getAdvancedButton(1, 2, "NIGHTMARE")}</td>
           </tr>
           <tr>
-            <td>{this.getAdvancedButton(2, 0, 12)}</td>
-            <td>{this.getAdvancedButton(2, 1, 13)}</td>
-            <td>{this.getAdvancedButton(2, 2, 14)}</td>
+            <td>{this.getAdvancedButton(2, 0, "EASY")}</td>
+            <td>{this.getAdvancedButton(2, 1, "MEDIUM")}</td>
+            <td>{this.getAdvancedButton(2, 2, "HARD")}</td>
           </tr>
           <tr>
-            <td>{this.getAdvancedButton(3, 0, 15)}</td>
-            <td>{this.getAdvancedButton(3, 1, 16)}</td>
-            <td>{this.getAdvancedButton(3, 2, 17)}</td>
+            <td>{this.getAdvancedButton(3, 0, "V4")}</td>
+            <td>{this.getAdvancedButton(3, 1, "V5")}</td>
+            <td>{this.getAdvancedButton(3, 2, "V6")}</td>
           </tr>
           <tr>
             <td></td>
@@ -1406,7 +1347,7 @@ class App extends React.Component {
               <input
                 className="advButton"
                 type="button"
-                value={traduction[this.state.language][18]}
+                value={traduction[this.state.language]["PLAY"]}
                 onClick={() => this.playAdvanced()}
               />
             </td>
