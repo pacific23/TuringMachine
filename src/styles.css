@@ -227,48 +227,17 @@ td {
 }
 
 .buttonMain {
+  background-image: url("./images/Back.jpg");
+  background-position: center center;
+  background-repeat: repeat;
   display: inline-block;
   text-decoration: none;
   color: #fff;
   font-weight: bold;
-  background-color: #538fbe;
   width: 80%;
   height: 80%;
   font-size: 24px;
   border: 1px solid #2d6898;
-  background-image: linear-gradient(
-    bottom,
-    rgb(73, 132, 180) 0%,
-    rgb(97, 155, 203) 100%
-  );
-  background-image: -o-linear-gradient(
-    bottom,
-    rgb(73, 132, 180) 0%,
-    rgb(97, 155, 203) 100%
-  );
-  background-image: -moz-linear-gradient(
-    bottom,
-    rgb(73, 132, 180) 0%,
-    rgb(97, 155, 203) 100%
-  );
-  background-image: -webkit-linear-gradient(
-    bottom,
-    rgb(73, 132, 180) 0%,
-    rgb(97, 155, 203) 100%
-  );
-  background-image: -ms-linear-gradient(
-    bottom,
-    rgb(73, 132, 180) 0%,
-    rgb(97, 155, 203) 100%
-  );
-
-  background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, rgb(73, 132, 180)),
-    color-stop(1, rgb(97, 155, 203))
-  );
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
