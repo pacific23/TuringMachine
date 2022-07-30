@@ -2,8 +2,6 @@ import { Component } from "react";
 import traduction from "./traduction";
 import idPage from "./idPage";
 
-import PrintIcon from "@mui/icons-material/Print";
-
 class MainMenu extends Component {
   render() {
     return (
@@ -49,11 +47,7 @@ class MainMenu extends Component {
                 type="button"
                 style={{ fontSize: this.props.sizeFont }}
               >
-                <PrintIcon />
-                &nbsp;
                 {traduction[this.props.language]["SHEET"]}
-                &nbsp;
-                <PrintIcon />
               </button>
             </td>
           </tr>
