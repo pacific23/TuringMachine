@@ -227,8 +227,8 @@ td {
 }
 
 .buttonMain {
-  background-color: #40b76e;
-  display: inline-block;
+  background-image: url("./images/Sheet.jpg");
+  background-size: 60%;
   text-decoration: none;
   font-weight: bold;
   color: white;
