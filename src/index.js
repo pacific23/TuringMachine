@@ -2,9 +2,11 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import Cookies from "universal-cookie";
 import "./styles.css";
-import traduction from "./language";
 
-import PrintIcon from "@mui/icons-material/Print";
+import MainMenu from "./MainMenu";
+
+import traduction from "./traduction";
+import idPage from "./idPage";
 
 import boxFR from "./images/BOX_FR.jpg";
 import boxEN from "./images/BOX_EN.jpg";
@@ -20,18 +22,6 @@ const cookies = new Cookies();
 
 var userID = "";
 var historicalGames;
-var idPage = {
-  P_MAIN: 0,
-  P_SHARP: 1,
-  P_ADV: 2,
-  P_LOADING: 3,
-  P_INGAME: 4,
-  P_ERROR: 5,
-  P_HIST: 6,
-  P_ABOUT: 8,
-  P_SHOWQUESTION: 9,
-  P_SOLUTION: 10
-};
 
 class App extends React.Component {
   state = {
@@ -427,51 +417,12 @@ class App extends React.Component {
           <tr>
             <td>
               {this.state.page === idPage["P_MAIN"] ? (
-                <table className="mainTab">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <input
-                          className="button"
-                          type="button"
-                          value={traduction[this.state.language]["QUICK"]}
-                          onClick={() => this.quickGame()}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input
-                          className="button"
-                          type="button"
-                          value={traduction[this.state.language]["DAY"]}
-                          onClick={() => this.gameOfTheDay()}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input
-                          className="button"
-                          type="button"
-                          value={traduction[this.state.language]["CUSTOM"]}
-                          onClick={() => this.changePage(idPage["P_ADV"])}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <button className="button" type="button">
-                          <PrintIcon />
-                          &nbsp;
-                          {traduction[this.state.language]["SHEET"]}
-                          &nbsp;
-                          <PrintIcon />
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <MainMenu
+                  language={this.state.language}
+                  quickGame={() => this.quickGame()}
+                  gameOfTheDay={() => this.gameOfTheDay()}
+                  changePage={(page) => this.changePage(page)}
+                />
               ) : null}
               {this.state.page === idPage["P_SHARP"] ? (
                 <table className="mainTab">
