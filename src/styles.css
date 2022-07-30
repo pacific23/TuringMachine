@@ -228,7 +228,6 @@ td {
 
 .buttonMain {
   background-color: #40b76e;
-  background-size: 80%;
   display: inline-block;
   text-decoration: none;
   font-weight: bold;
@@ -236,7 +235,7 @@ td {
   text-shadow: 2px 2px 4px #000, -1px -1px 0 #000, 1px -1px 0 #000,
     -1px 1px 0 #000, 1px 1px 0 #000;
   width: 80%;
-  height: 80%;
+  height: 50%;
   font-size: 30px;
   border: 1px solid #aaa;
   -webkit-border-radius: 20px;
@@ -249,7 +248,7 @@ td {
 
 .buttonMain1 {
   background-image: url("./images/Back1.jpg");
-  background-size: 80%;
+  background-size: 60%;
   display: inline-block;
   text-decoration: none;
   font-weight: bold;
@@ -270,7 +269,7 @@ td {
 
 .buttonMain2 {
   background-image: url("./images/Back2.jpg");
-  background-size: 80%;
+  background-size: 60%;
   display: inline-block;
   text-decoration: none;
   font-weight: bold;
@@ -291,7 +290,7 @@ td {
 
 .buttonMain3 {
   background-image: url("./images/Back3.jpg");
-  background-size: 80%;
+  background-size: 60%;
   display: inline-block;
   text-decoration: none;
   font-weight: bold;
