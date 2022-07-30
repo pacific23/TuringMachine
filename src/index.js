@@ -6,7 +6,8 @@ import traduction from "./language";
 
 import PrintIcon from "@mui/icons-material/Print";
 
-import box from "./images/Box.jpg";
+import boxFR from "./images/BOX_FR.jpg";
+import boxEN from "./images/BOX_EN.jpg";
 import number from "./images/Number.png";
 import history from "./images/History.png";
 import home from "./images/Home.png";
@@ -14,10 +15,23 @@ import langFR from "./images/LangFR.png";
 import langEN from "./images/LangEN.png";
 
 const imgLang = [langFR, langEN];
+const imgBox = [boxFR, boxEN];
 const cookies = new Cookies();
 
 var userID = "";
 var historicalGames;
+var idPage = {
+  P_MAIN: 0,
+  P_SHARP: 1,
+  P_ADV: 2,
+  P_LOADING: 3,
+  P_INGAME: 4,
+  P_ERROR: 5,
+  P_HIST: 6,
+  P_ABOUT: 8,
+  P_SHOWQUESTION: 9,
+  P_SOLUTION: 10
+};
 
 class App extends React.Component {
   state = {
@@ -165,13 +179,13 @@ class App extends React.Component {
   }
 
   loadGame(url) {
-    this.setState({ page: 3 });
+    this.changePage(idPage["P_LOADING"]);
     var xhr = new XMLHttpRequest();
 
     xhr.addEventListener("load", () => {
       var data = xhr.responseText;
       if (data.length === 0) {
-        this.setState({ page: 5 });
+        this.changePage(idPage["P_ERROR"]);
         return;
       }
       var jsonResponse = JSON.parse(data);
@@ -195,16 +209,16 @@ class App extends React.Component {
         if (this.game.m === 2) {
           this.sortInd();
         }
-        this.setState({ page: 4 });
+        this.changePage(idPage["P_INGAME"]);
       } else {
-        this.setState({ page: 5 });
+        this.changePage(idPage["P_ERROR"]);
       }
     });
     xhr.addEventListener("error", () => {
-      this.setState({ page: 5 });
+      this.changePage(idPage["P_ERROR"]);
     });
     xhr.addEventListener("abort", () => {
-      this.setState({ page: 5 });
+      this.changePage(idPage["P_ERROR"]);
     });
     xhr.open(
       "GET",
@@ -236,28 +250,8 @@ class App extends React.Component {
     );
   }
 
-  clickSolution() {
-    this.setState({ page: 10 });
-  }
-
-  clickAbout() {
-    this.setState({ page: 8 });
-  }
-
-  getHistorical() {
-    this.setState({ page: 6 });
-  }
-
-  advancedGame() {
-    this.setState({ page: 2 });
-  }
-
-  clickSharp() {
-    this.setState({ page: 1 });
-  }
-
-  backHome() {
-    this.setState({ page: 0 });
+  changePage(newPage) {
+    this.setState({ page: newPage });
   }
 
   handleChange(value) {
@@ -276,7 +270,10 @@ class App extends React.Component {
   }
 
   getPage() {
-    if (this.state.page === 0 || this.state.page === 1) {
+    if (
+      this.state.page === idPage["P_MAIN"] ||
+      this.state.page === idPage["P_SHARP"]
+    ) {
       return (
         <div className="App">
           {this.state.landscapeMode
@@ -285,7 +282,7 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.page === 2) {
+    if (this.state.page === idPage["P_ADV"]) {
       return (
         <div className="App">
           {this.state.landscapeMode
@@ -294,7 +291,7 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.page === 3) {
+    if (this.state.page === idPage["P_LOADING"]) {
       return (
         <div className="App">
           <table className="mainTab">
@@ -307,7 +304,10 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.page === 4 || this.state.page === 9) {
+    if (
+      this.state.page === idPage["P_INGAME"] ||
+      this.state.page === idPage["P_SHOWQUESTION"]
+    ) {
       return (
         <div className="App">
           {this.state.landscapeMode
@@ -316,7 +316,7 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.page === 5) {
+    if (this.state.page === idPage["P_ERROR"]) {
       return (
         <div className="App">
           <table className="mainTab">
@@ -327,7 +327,7 @@ class App extends React.Component {
                     id="homeBut"
                     className="smallButton"
                     type="submit"
-                    onClick={() => this.backHome()}
+                    onClick={() => this.changePage(idPage["P_MAIN"])}
                   >
                     <img src={home} width="20" alt="home" />
                   </button>
@@ -339,7 +339,7 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.page === 6) {
+    if (this.state.page === idPage["P_HIST"]) {
       return (
         <div className="App">
           <table className="mainTab">
@@ -350,7 +350,7 @@ class App extends React.Component {
                     id="homeBut"
                     className="smallButton"
                     type="submit"
-                    onClick={() => this.backHome()}
+                    onClick={() => this.changePage(idPage["P_MAIN"])}
                   >
                     <img src={home} width="20" alt="home" />
                   </button>
@@ -362,7 +362,7 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.page === 8) {
+    if (this.state.page === idPage["P_ABOUT"]) {
       return (
         <div className="App">
           <table className="mainTab">
@@ -373,7 +373,7 @@ class App extends React.Component {
                     id="homeBut"
                     className="smallButton"
                     type="submit"
-                    onClick={() => this.backHome()}
+                    onClick={() => this.changePage(idPage["P_MAIN"])}
                   >
                     <img src={home} width="20" alt="home" />
                   </button>
@@ -394,7 +394,7 @@ class App extends React.Component {
         </div>
       );
     }
-    if (this.state.page === 10) {
+    if (this.state.page === idPage["P_SOLUTION"]) {
       return (
         <div className="App">
           {this.state.landscapeMode
@@ -426,7 +426,7 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              {this.state.page === 0 ? (
+              {this.state.page === idPage["P_MAIN"] ? (
                 <table className="mainTab">
                   <tbody>
                     <tr>
@@ -455,7 +455,7 @@ class App extends React.Component {
                           className="button"
                           type="button"
                           value={traduction[this.state.language]["CUSTOM"]}
-                          onClick={() => this.advancedGame()}
+                          onClick={() => this.changePage(idPage["P_ADV"])}
                         />
                       </td>
                     </tr>
@@ -473,7 +473,7 @@ class App extends React.Component {
                   </tbody>
                 </table>
               ) : null}
-              {this.state.page === 1 ? (
+              {this.state.page === idPage["P_SHARP"] ? (
                 <table className="mainTab">
                   <tbody>
                     <tr>
@@ -514,7 +514,7 @@ class App extends React.Component {
         <button
           className="smallButton"
           type="submit"
-          onClick={() => this.clickSharp()}
+          onClick={() => this.changePage(idPage["P_SHARP"])}
         >
           <img src={number} width="20" alt="number" />
         </button>
@@ -523,7 +523,7 @@ class App extends React.Component {
           className="smallButton"
           type="button"
           value={traduction[this.state.language]["ABOUT"]}
-          onClick={() => this.clickAbout()}
+          onClick={() => this.changePage(idPage["P_ABOUT"])}
         />
         &nbsp;
         <button
@@ -578,7 +578,7 @@ class App extends React.Component {
                 id="homeBut"
                 className="smallButton"
                 type="submit"
-                onClick={() => this.backHome()}
+                onClick={() => this.changePage(idPage["P_MAIN"])}
               >
                 <img src={home} width="20" alt="home" />
               </button>
@@ -727,13 +727,13 @@ class App extends React.Component {
             </tr>
           ) : null}
           <tr>
-            {this.state.page === 4 ? (
+            {this.state.page === idPage["P_INGAME"] ? (
               <td colSpan={this.game.n}>
                 <input
                   className="smallButton"
                   type="button"
                   value={traduction[this.state.language]["SOLUTION"]}
-                  onClick={() => this.clickSolution()}
+                  onClick={() => this.changePage(idPage["P_SHOWQUESTION"])}
                 />
               </td>
             ) : (
@@ -743,7 +743,7 @@ class App extends React.Component {
                   type="button"
                   value={traduction[this.state.language]["NO"]}
                   onClick={() => {
-                    this.setState({ page: 4 });
+                    this.changePage(idPage["P_INGAME"]);
                   }}
                 />
                 &nbsp;
@@ -758,7 +758,7 @@ class App extends React.Component {
                   type="button"
                   value={traduction[this.state.language]["YES"]}
                   onClick={() => {
-                    this.setState({ page: 10 });
+                    this.changePage(idPage["P_SOLUTION"]);
                   }}
                 />
               </td>
@@ -779,7 +779,7 @@ class App extends React.Component {
                 id="homeBut"
                 className="smallButton"
                 type="submit"
-                onClick={() => this.backHome()}
+                onClick={() => this.changePage(idPage["P_MAIN"])}
               >
                 <img src={home} width="20" alt="home" />
               </button>
@@ -947,13 +947,13 @@ class App extends React.Component {
             </tr>
           ) : null}
           <tr>
-            {this.state.page === 4 ? (
+            {this.state.page === idPage["P_INGAME"] ? (
               <td colSpan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
                 <input
                   className="smallButton"
                   type="button"
                   value={traduction[this.state.language]["SOLUTION"]}
-                  onClick={() => this.clickSolution()}
+                  onClick={() => this.changePage(idPage["P_SHOWQUESTION"])}
                 />
               </td>
             ) : (
@@ -963,7 +963,7 @@ class App extends React.Component {
                   type="button"
                   value={traduction[this.state.language]["NO"]}
                   onClick={() => {
-                    this.setState({ page: 4 });
+                    this.changePage(idPage["P_INGAME"]);
                   }}
                 />
                 &nbsp;
@@ -978,7 +978,7 @@ class App extends React.Component {
                   type="button"
                   value={traduction[this.state.language]["YES"]}
                   onClick={() => {
-                    this.setState({ page: 10 });
+                    this.changePage(idPage["P_SOLUTION"]);
                   }}
                 />
               </td>
@@ -999,7 +999,7 @@ class App extends React.Component {
                 id="homeBut"
                 className="smallButton"
                 type="submit"
-                onClick={() => this.backHome()}
+                onClick={() => this.changePage(idPage["P_MAIN"])}
               >
                 <img src={home} width="20" alt="home" />
               </button>
@@ -1109,7 +1109,7 @@ class App extends React.Component {
                 className="smallButton"
                 type="button"
                 value={traduction[this.state.language]["BACK"]}
-                onClick={() => this.setState({ page: 4 })}
+                onClick={() => this.changePage(idPage["P_INGAME"])}
               />
             </td>
           </tr>
@@ -1128,7 +1128,7 @@ class App extends React.Component {
                 id="homeBut"
                 className="smallButton"
                 type="submit"
-                onClick={() => this.backHome()}
+                onClick={() => this.changePage(idPage["P_MAIN"])}
               >
                 <img src={home} width="20" alt="home" />
               </button>
@@ -1246,7 +1246,7 @@ class App extends React.Component {
                 className="smallButton"
                 type="button"
                 value={traduction[this.state.language]["BACK"]}
-                onClick={() => this.setState({ page: 4 })}
+                onClick={() => this.changePage(idPage["P_INGAME"])}
               />
             </td>
           </tr>
@@ -1261,12 +1261,12 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              {this.state.page !== 0 ? (
+              {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"
                   className="smallButton"
                   type="submit"
-                  onClick={() => this.backHome()}
+                  onClick={() => this.changePage(idPage["P_MAIN"])}
                 >
                   <img src={home} width="20" alt="home" />
                 </button>
@@ -1310,12 +1310,12 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              {this.state.page !== 0 ? (
+              {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"
                   className="smallButton"
                   type="submit"
-                  onClick={() => this.backHome()}
+                  onClick={() => this.changePage(idPage["P_MAIN"])}
                 >
                   <img src={home} width="20" alt="home" />
                 </button>
@@ -1363,12 +1363,12 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              {this.state.page !== 0 ? (
+              {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"
                   className="smallButton"
                   type="submit"
-                  onClick={() => this.backHome()}
+                  onClick={() => this.changePage(idPage["P_MAIN"])}
                 >
                   <img src={home} width="20" alt="home" />
                 </button>
@@ -1378,13 +1378,13 @@ class App extends React.Component {
                   id="histBut"
                   className="smallButton"
                   type="submit"
-                  onClick={() => this.getHistorical()}
+                  onClick={() => this.changePage(idPage["P_HIST"])}
                 >
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
               <img
-                src={box}
+                src={imgBox[this.state.language]}
                 width={this.state.sizeImage}
                 height="auto"
                 alt="tm"
@@ -1405,12 +1405,12 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              {this.state.page !== 0 ? (
+              {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"
                   className="smallButton"
                   type="submit"
-                  onClick={() => this.backHome()}
+                  onClick={() => this.changePage(idPage["P_MAIN"])}
                 >
                   <img src={home} width="20" alt="home" />
                 </button>
@@ -1420,13 +1420,13 @@ class App extends React.Component {
                   id="histBut"
                   className="smallButton"
                   type="submit"
-                  onClick={() => this.getHistorical()}
+                  onClick={() => this.changePage(idPage["P_HIST"])}
                 >
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
               <img
-                src={box}
+                src={imgBox[this.state.language]}
                 width={this.state.sizeImage}
                 height="auto"
                 alt="tm"

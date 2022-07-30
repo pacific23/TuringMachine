@@ -2,7 +2,7 @@
   font-family: "Tahoma";
   font-size: 24px;
   font-weight: bold;
-  color: #555;
+  color: #fff;
   text-align: center;
   position: absolute;
   top: 0px;
@@ -16,7 +16,7 @@ table.mainTab {
   table-layout: fixed;
   width: 100%;
   height: 100%;
-  background-color: #ddd;
+  background-color: #fff;
 }
 
 td {
