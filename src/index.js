@@ -10,7 +10,6 @@ import idPage from "./idPage";
 
 import boxFR from "./images/BOX_FR.jpg";
 import boxEN from "./images/BOX_EN.jpg";
-import back from "./images/Back.jpg";
 import number from "./images/Number.png";
 import history from "./images/History.png";
 import home from "./images/Home.png";

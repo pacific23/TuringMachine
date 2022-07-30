@@ -12,7 +12,7 @@ class MainMenu extends Component {
           <tr>
             <td>
               <input
-                className="buttonMain"
+                className="buttonMain1"
                 type="button"
                 value={traduction[this.props.language]["QUICK"]}
                 onClick={() => this.props.quickGame()}
@@ -22,7 +22,7 @@ class MainMenu extends Component {
           <tr>
             <td>
               <input
-                className="buttonMain"
+                className="buttonMain2"
                 type="button"
                 value={traduction[this.props.language]["DAY"]}
                 onClick={() => this.props.gameOfTheDay()}
@@ -32,7 +32,7 @@ class MainMenu extends Component {
           <tr>
             <td>
               <input
-                className="buttonMain"
+                className="buttonMain3"
                 type="button"
                 value={traduction[this.props.language]["CUSTOM"]}
                 onClick={() => this.props.changePage(idPage["P_ADV"])}
