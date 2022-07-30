@@ -16,6 +16,7 @@ class MainMenu extends Component {
                 type="button"
                 value={traduction[this.props.language]["QUICK"]}
                 onClick={() => this.props.quickGame()}
+                style={{ fontSize: this.props.sizeFont }}
               />
             </td>
           </tr>
@@ -26,6 +27,7 @@ class MainMenu extends Component {
                 type="button"
                 value={traduction[this.props.language]["DAY"]}
                 onClick={() => this.props.gameOfTheDay()}
+                style={{ fontSize: this.props.sizeFont }}
               />
             </td>
           </tr>
@@ -36,12 +38,17 @@ class MainMenu extends Component {
                 type="button"
                 value={traduction[this.props.language]["CUSTOM"]}
                 onClick={() => this.props.changePage(idPage["P_ADV"])}
+                style={{ fontSize: this.props.sizeFont }}
               />
             </td>
           </tr>
           <tr>
             <td>
-              <button className="buttonMain" type="button">
+              <button
+                className="buttonMain"
+                type="button"
+                style={{ fontSize: this.props.sizeFont }}
+              >
                 <PrintIcon />
                 &nbsp;
                 {traduction[this.props.language]["SHEET"]}

@@ -27,6 +27,7 @@ class App extends React.Component {
   state = {
     landscapeMode: true,
     sizeImage: 1,
+    sizeFont: 24,
     page: 0,
     historicalData: false,
     language: 1,
@@ -129,11 +130,13 @@ class App extends React.Component {
     if (sizex < sizey) {
       this.setState({
         sizeImage: Math.min(sizex * 0.7, sizey / 2),
+        sizeFont: Math.max(sizex * 0.06, 20),
         landscapeMode: sizex < sizey ? false : true
       });
     } else {
       this.setState({
         sizeImage: Math.min(sizex / 2, sizey - 75),
+        sizeFont: Math.max(sizex * 0.03, 20),
         landscapeMode: sizex < sizey ? false : true
       });
     }
@@ -422,6 +425,7 @@ class App extends React.Component {
                   quickGame={() => this.quickGame()}
                   gameOfTheDay={() => this.gameOfTheDay()}
                   changePage={(page) => this.changePage(page)}
+                  sizeFont={this.state.sizeFont}
                 />
               ) : null}
               {this.state.page === idPage["P_SHARP"] ? (
