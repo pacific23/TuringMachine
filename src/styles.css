@@ -248,7 +248,7 @@ td {
 }
 
 .buttonMain1 {
-  background-image: url("/images/Back1.jpg");
+  background-image: url("./images/Back1.jpg");
   background-size: 80%;
   display: inline-block;
   text-decoration: none;
@@ -269,7 +269,7 @@ td {
 }
 
 .buttonMain2 {
-  background-image: url("/images/Back2.jpg");
+  background-image: url("./images/Back2.jpg");
   background-size: 80%;
   display: inline-block;
   text-decoration: none;
@@ -290,7 +290,7 @@ td {
 }
 
 .buttonMain3 {
-  background-image: url("/images/Back3.jpg");
+  background-image: url("./images/Back3.jpg");
   background-size: 80%;
   display: inline-block;
   text-decoration: none;
