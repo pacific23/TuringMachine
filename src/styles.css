@@ -271,9 +271,9 @@ td {
   display: inline-block;
   text-decoration: none;
   font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px #000, -1px -1px 0 #000, 1px -1px 0 #000,
-    -1px 1px 0 #000, 1px 1px 0 #000;
+  color: black;
+  text-shadow: 2px 2px 4px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff,
+    -1px 1px 0 #fff, 1px 1px 0 #fff;
   width: 80%;
   height: 80%;
   border: 1px solid #aaa;
@@ -291,9 +291,9 @@ td {
   display: inline-block;
   text-decoration: none;
   font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px #000, -1px -1px 0 #000, 1px -1px 0 #000,
-    -1px 1px 0 #000, 1px 1px 0 #000;
+  color: black;
+  text-shadow: 2px 2px 4px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff,
+    -1px 1px 0 #fff, 1px 1px 0 #fff;
   width: 80%;
   height: 80%;
   border: 1px solid #aaa;
