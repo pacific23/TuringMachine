@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import "./styles.css";
 
 import MainMenu from "./MainMenu";
+import CustomGame from "./CustomGame";
 
 import traduction from "./traduction";
 import idPage from "./idPage";
@@ -277,9 +278,14 @@ class App extends React.Component {
     if (this.state.page === idPage["P_ADV"]) {
       return (
         <div className="App">
-          {this.state.landscapeMode
-            ? this.getLandscapeAdvancedMenu()
-            : this.getPortraitAdvancedMenu()}
+          <CustomGame
+            landscapeMode={this.state.landscapeMode}
+            language={this.state.language}
+            changePage={(page) => this.changePage(page)}
+            advancedSettings={this.state.advancedSettings}
+            clickAdvanced={(column, row) => this.clickAdvanced(column, row)}
+            playAdvanced={() => this.playAdvanced()}
+          />
         </div>
       );
     }

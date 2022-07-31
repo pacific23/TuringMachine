@@ -17,9 +17,19 @@ table.mainTab {
   width: 100%;
   height: 100%;
   background-color: #fff;
+  border-collapse: collapse;
 }
 
-td {
+table.compSolTab {
+  table-layout: fixed;
+  width: 70%;
+  height: 50px;
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+tr td {
   vertical-align: center;
 }
 
@@ -53,12 +63,33 @@ td {
   color: #f7a221;
 }
 
+#bcolor1 {
+  background-color: #f7a221;
+  color: #fff;
+  line-height: 0.7em;
+  padding: 5px;
+}
+
 #color2 {
   color: #56b2da;
 }
 
+#bcolor2 {
+  background-color: #56b2da;
+  color: #fff;
+  line-height: 0.7em;
+  padding: 5px;
+}
+
 #color3 {
   color: #8067ad;
+}
+
+#bcolor3 {
+  background-color: #8067ad;
+  color: #fff;
+  line-height: 0.7em;
+  padding: 5px;
 }
 
 form {
@@ -74,6 +105,14 @@ form {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+}
+
+#smallText {
+  font-size: 15px;
+}
+
+#verySmallText {
+  font-size: 12px;
 }
 
 .ind {
@@ -591,13 +630,13 @@ form {
   -moz-border-radius: 5px;
   border-radius: 5px;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0, 0, 0, 0.4),
+  -webkit-box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0, 0, 0, 0.4),
+  -moz-box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0, 0, 0, 0.4),
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
 }
@@ -649,42 +688,15 @@ form {
   -moz-border-radius: 5px;
   border-radius: 5px;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0, 0, 0, 0.4),
+  -webkit-box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0, 0, 0, 0.4),
+  -moz-box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  box-shadow: 0px 2px 0px #2b638f, 0px 3px 15px rgba(0, 0, 0, 0.4),
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  transform: translate(0, 4px);
-}
-
-.solButton {
-  display: inline-block;
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-  background-color: #fff;
-  width: 90%;
-  height: 90%;
-  font-size: 15px;
-  border: 1px solid #000;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0px 6px 0px #000, 0px 3px 15px rgba(0, 0, 0, 0.4),
-    inset 0px 1px 0px rgba(255, 255, 255, 0.3),
-    inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: 0px 6px 0px #000, 0px 3px 15px rgba(0, 0, 0, 0.4),
-    inset 0px 1px 0px rgba(255, 255, 255, 0.3),
-    inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  box-shadow: 0px 2px 0px #000, 0px 3px 15px rgba(0, 0, 0, 0.4),
-    inset 0px 1px 0px rgba(255, 255, 255, 0.3),
-    inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  transform: translate(0, 4px);
 }
 
 .advButton:active {
@@ -721,16 +733,39 @@ form {
     color-stop(0, rgb(88, 154, 204)),
     color-stop(1, rgb(90, 150, 199))
   );
-  -webkit-box-shadow: 0px 2px 0px #2b638f, 0px 1px 6px rgba(0, 0, 0, 0.4),
+  -webkit-box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: 0px 2px 0px #2b638f, 0px 1px 6px rgba(0, 0, 0, 0.4),
+  -moz-box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  box-shadow: 0px 2px 0px #2b638f, 0px 1px 6px rgba(0, 0, 0, 0.4),
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3),
     inset 0px 0px 3px rgba(255, 255, 255, 0.5);
-  -webkit-transform: translate(0, 4px);
-  -moz-transform: translate(0, 4px);
+}
+
+.solButton {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  background-color: #fff;
+  width: 90%;
+  height: 90%;
+  font-size: 15px;
+  border: 1px solid #000;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 6px 0px #000, 0px 3px 15px rgba(0, 0, 0, 0.4),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.3),
+    inset 0px 0px 3px rgba(255, 255, 255, 0.5);
+  -moz-box-shadow: 0px 6px 0px #000, 0px 3px 15px rgba(0, 0, 0, 0.4),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.3),
+    inset 0px 0px 3px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 0px #000, 0px 3px 15px rgba(0, 0, 0, 0.4),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.3),
+    inset 0px 0px 3px rgba(255, 255, 255, 0.5);
   transform: translate(0, 4px);
 }
