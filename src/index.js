@@ -1282,17 +1282,6 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              <form onSubmit={() => this.hashGame()}>
-                <input
-                  className="text"
-                  type="text"
-                  defaultValue=""
-                  placeholder={traduction[this.state.language]["SEARCH"]}
-                  size="10"
-                  onChange={(e) => this.handleChange(e.target.value)}
-                />
-              </form>
-              <br />
               {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"
@@ -1313,6 +1302,17 @@ class App extends React.Component {
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
+              <form onSubmit={() => this.hashGame()}>
+                <input
+                  className="text"
+                  type="text"
+                  defaultValue=""
+                  placeholder={traduction[this.state.language]["SEARCH"]}
+                  size="10"
+                  onChange={(e) => this.handleChange(e.target.value)}
+                />
+              </form>
+              <br />
               <img
                 src={imgBox[this.state.language]}
                 width={this.state.sizeImage}
@@ -1335,16 +1335,6 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              <form onSubmit={() => this.hashGame()}>
-                <input
-                  className="text"
-                  type="text"
-                  defaultValue=""
-                  placeholder={traduction[this.state.language]["SEARCH"]}
-                  size="10"
-                  onChange={(e) => this.handleChange(e.target.value)}
-                />
-              </form>
               {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"
@@ -1365,6 +1355,16 @@ class App extends React.Component {
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
+              <form onSubmit={() => this.hashGame()}>
+                <input
+                  className="text"
+                  type="text"
+                  defaultValue=""
+                  placeholder={traduction[this.state.language]["SEARCH"]}
+                  size="10"
+                  onChange={(e) => this.handleChange(e.target.value)}
+                />
+              </form>
               <img
                 src={imgBox[this.state.language]}
                 width={this.state.sizeImage}
