@@ -7,7 +7,8 @@ var idPage = {
   P_HIST: 6,
   P_ABOUT: 8,
   P_SHOWQUESTION: 9,
-  P_SOLUTION: 10
+  P_SOLUTION: 10,
+  P_TESTCODE: 11
 };
 
 export default idPage;

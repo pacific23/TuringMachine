@@ -90,39 +90,37 @@ class CustomGame extends Component {
       <table className="mainTab">
         <thead>
           <tr>
-            <td>
-              {categ === 1 ? (
-                <div id="bcolor1">
-                  <span style={{ fontSize: this.props.smallSizeFont }}>
-                    {traduction[this.props.language]["STEP1"]}
-                  </span>
-                </div>
-              ) : (
-                <div></div>
-              )}
-            </td>
-            <td>
-              {categ === 2 ? (
+            {categ === 1 ? (
+              <td id="bcolor1">
+                <span style={{ fontSize: this.props.smallSizeFont }}>
+                  {traduction[this.props.language]["STEP1"]}
+                </span>
+              </td>
+            ) : (
+              <td></td>
+            )}
+            {categ === 2 ? (
+              <td id="bcolor2">
                 <div id="bcolor2">
                   <span style={{ fontSize: this.props.smallSizeFont }}>
                     {traduction[this.props.language]["STEP2"]}
                   </span>
                 </div>
-              ) : (
-                <div></div>
-              )}
-            </td>
-            <td>
-              {categ === 3 ? (
+              </td>
+            ) : (
+              <td></td>
+            )}
+            {categ === 3 ? (
+              <td id="bcolor3">
                 <div id="bcolor3">
                   <span style={{ fontSize: this.props.smallSizeFont }}>
                     {traduction[this.props.language]["STEP3"]}
                   </span>
                 </div>
-              ) : (
-                <div></div>
-              )}
-            </td>
+              </td>
+            ) : (
+              <td></td>
+            )}
           </tr>
         </thead>
         {this.props.landscapeMode ? (

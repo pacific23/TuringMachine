@@ -19,6 +19,8 @@ import symb0 from "./images/Symb0.png";
 import symb1 from "./images/Symb1.png";
 import symb2 from "./images/Symb2.png";
 import symb3 from "./images/Symb3.png";
+import clipboard from "./images/Clipboard.png";
+import clipboardOK from "./images/ClipboardOK.png";
 
 const imgLang = [langFR, langEN];
 const imgBox = [boxFR, boxEN];
@@ -38,7 +40,11 @@ class App extends React.Component {
     historicalData: false,
     language: 1,
     hashValue: "",
-    advancedSettings: [0, 0, 1, 1]
+    codeValue: "",
+    advancedSettings: [0, 0, 1, 1],
+    actualClipboard: clipboard,
+    wrongCode: false,
+    youWin: false
   };
   game = {
     idPartie: 0,
@@ -150,6 +156,16 @@ class App extends React.Component {
     }
   }
 
+  copyToClipboard() {
+    const el = document.createElement("textarea");
+    el.value = "#" + this.game.hash;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    this.setState({ actualClipboard: clipboardOK });
+  }
+
   addGame(hash) {
     for (var i = 0; i < historicalGames.length; i++) {
       if (historicalGames[i] === hash) {
@@ -229,7 +245,11 @@ class App extends React.Component {
   }
 
   quickGame() {
-    this.loadGame("s=0");
+    if (this.state.hashValue.length > 0) {
+      this.loadGame("h=" + this.state.hashValue.toUpperCase());
+    } else {
+      this.loadGame("s=0");
+    }
   }
 
   gameOfTheDay() {
@@ -252,13 +272,37 @@ class App extends React.Component {
   }
 
   changePage(newPage) {
-    this.setState({ page: newPage });
+    this.setState({
+      page: newPage,
+      actualClipboard: clipboard,
+      hashValue: "",
+      codeValue: "",
+      wrongCode: false,
+      youWin: false
+    });
+    if (newPage === 0) {
+      this.state.advancedSettings = [0, 0, 1, 1];
+    }
   }
 
   handleChange(value) {
     value = value.replace("#", "");
     value = value.replace(" ", "");
     this.setState({ hashValue: value });
+  }
+
+  handleChangeCode(value) {
+    value = value.replace(" ", "");
+    this.setState({ codeValue: value });
+  }
+
+  testCode() {
+    if (this.state.codeValue == this.game.code) {
+      this.changePage(idPage["P_SOLUTION"]);
+      this.setState({ youWin: true });
+    } else {
+      this.setState({ wrongCode: true });
+    }
   }
 
   clickAdvanced(column, row) {
@@ -271,10 +315,7 @@ class App extends React.Component {
   }
 
   getPage() {
-    if (
-      this.state.page === idPage["P_MAIN"] ||
-      this.state.page === idPage["P_SHARP"]
-    ) {
+    if (this.state.page === idPage["P_MAIN"]) {
       return (
         <div className="App">
           {this.state.landscapeMode
@@ -322,6 +363,9 @@ class App extends React.Component {
             : this.getPortraitGame()}
         </div>
       );
+    }
+    if (this.state.page === idPage["P_TESTCODE"]) {
+      return <div className="App">{this.getInputCodePage()}</div>;
     }
     if (this.state.page === idPage["P_ERROR"]) {
       return (
@@ -427,6 +471,52 @@ class App extends React.Component {
     ));
   }
 
+  getInputCodePage() {
+    return (
+      <table className="mainTab">
+        <tbody>
+          <tr>
+            <td>
+              {this.state.wrongCode ? (
+                <span>{traduction[this.state.language]["FALSECODE"]}</span>
+              ) : (
+                <span>&nbsp;</span>
+              )}
+              <br />
+              <br />
+              <form onSubmit={() => this.testCode()}>
+                <input
+                  autoFocus
+                  className="code"
+                  type="text"
+                  defaultValue=""
+                  placeholder={traduction[this.state.language]["INPUTCODE"]}
+                  size="15"
+                  onChange={(e) => this.handleChangeCode(e.target.value)}
+                />
+                <br />
+                <br />
+                <input
+                  className="smallButton"
+                  type="button"
+                  value={traduction[this.state.language]["TESTCODE"]}
+                  onClick={() => this.testCode()}
+                />
+                &nbsp;
+                <input
+                  className="smallButton"
+                  type="button"
+                  value={traduction[this.state.language]["CANCEL"]}
+                  onClick={() => this.changePage(idPage["P_INGAME"])}
+                />
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
+
   getMainMenu() {
     return (
       <table className="mainTab">
@@ -470,37 +560,6 @@ class App extends React.Component {
     );
   }
 
-  getAdvancedButton(column, row, textValue) {
-    return (
-      <input
-        className={
-          this.state.advancedSettings[column] === row
-            ? "advButtonActive"
-            : "advButton"
-        }
-        type="button"
-        value={traduction[this.state.language][textValue]}
-        onClick={() => this.clickAdvanced(column, row)}
-      />
-    );
-  }
-
-  getAdvancedButtonImg(column, row, img) {
-    return (
-      <button
-        id="advBut"
-        className={
-          this.state.advancedSettings[column] === row
-            ? "advButtonActive"
-            : "advButton"
-        }
-        type="submit"
-        onClick={() => this.clickAdvanced(column, row)}
-        style={{ backgroundImage: `url(${img})` }}
-      ></button>
-    );
-  }
-
   getLandscapeGame() {
     return (
       <table className="mainTab">
@@ -513,9 +572,16 @@ class App extends React.Component {
                 type="submit"
                 onClick={() => this.changePage(idPage["P_MAIN"])}
               >
-                <img src={home} width="20" alt="home" />
+                <img src={home} width="20" height="auto" alt="home" />
               </button>
               {"#" + this.game.hash}
+              <img
+                src={this.state.actualClipboard}
+                width="30"
+                height="auto"
+                alt="copy"
+                onClick={() => this.copyToClipboard()}
+              />
             </td>
           </tr>
           <tr>
@@ -534,9 +600,7 @@ class App extends React.Component {
               {this.game.n > 4 ? <td></td> : null}
               {this.game.n > 5 ? <td></td> : null}
             </tr>
-          ) : (
-            <div></div>
-          )}
+          ) : null}
           {this.game.m == 1 ? (
             <tr>
               <td colspan="4" align="left">
@@ -545,9 +609,7 @@ class App extends React.Component {
               {this.game.n > 4 ? <td></td> : null}
               {this.game.n > 5 ? <td></td> : null}
             </tr>
-          ) : (
-            <div></div>
-          )}
+          ) : null}
           {this.game.m != 2 ? (
             <tr>
               <td id="spotLeft">
@@ -708,9 +770,7 @@ class App extends React.Component {
               {this.game.n > 4 ? <td></td> : null}
               {this.game.n > 5 ? <td></td> : null}
             </tr>
-          ) : (
-            <div></div>
-          )}
+          ) : null}
           {this.game.m == 2 ? (
             <tr>
               <td colSpan={this.game.n}>
@@ -751,9 +811,16 @@ class App extends React.Component {
               </td>
             </tr>
           ) : null}
-          <tr>
-            {this.state.page === idPage["P_INGAME"] ? (
+          {this.state.page === idPage["P_INGAME"] ? (
+            <tr>
               <td colSpan={this.game.n}>
+                <input
+                  className="smallButton"
+                  type="button"
+                  value={traduction[this.state.language]["CHECKCODE"]}
+                  onClick={() => this.changePage(idPage["P_TESTCODE"])}
+                />
+                &nbsp;&nbsp;
                 <input
                   className="smallButton"
                   type="button"
@@ -761,7 +828,10 @@ class App extends React.Component {
                   onClick={() => this.changePage(idPage["P_SHOWQUESTION"])}
                 />
               </td>
-            ) : (
+            </tr>
+          ) : null}
+          {this.state.page === idPage["P_SHOWQUESTION"] ? (
+            <tr>
               <td colSpan={this.game.n}>
                 <input
                   className="smallButton"
@@ -787,8 +857,8 @@ class App extends React.Component {
                   }}
                 />
               </td>
-            )}
-          </tr>
+            </tr>
+          ) : null}
         </tbody>
       </table>
     );
@@ -809,6 +879,13 @@ class App extends React.Component {
                 <img src={home} width="20" alt="home" />
               </button>
               {"#" + this.game.hash}
+              <img
+                src={this.state.actualClipboard}
+                width="30"
+                height="auto"
+                alt="copy"
+                onClick={() => this.copyToClipboard()}
+              />
             </td>
           </tr>
           <tr id="spotTop">
@@ -985,9 +1062,7 @@ class App extends React.Component {
                 {traduction[this.state.language]["CRITERIAMIXED"]} :
               </td>
             </tr>
-          ) : (
-            <div></div>
-          )}
+          ) : null}
           {this.game.m == 2 ? (
             <tr>
               <td colSpan="2">
@@ -1028,8 +1103,20 @@ class App extends React.Component {
               </td>
             </tr>
           ) : null}
-          <tr>
-            {this.state.page === idPage["P_INGAME"] ? (
+          {this.state.page === idPage["P_INGAME"] ? (
+            <tr>
+              <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
+                <input
+                  className="smallButton"
+                  type="button"
+                  value={traduction[this.state.language]["CHECKCODE"]}
+                  onClick={() => this.changePage(idPage["P_TESTCODE"])}
+                />
+              </td>
+            </tr>
+          ) : null}
+          {this.state.page === idPage["P_INGAME"] ? (
+            <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
                   className="smallButton"
@@ -1038,7 +1125,21 @@ class App extends React.Component {
                   onClick={() => this.changePage(idPage["P_SHOWQUESTION"])}
                 />
               </td>
-            ) : (
+            </tr>
+          ) : null}
+          {this.state.page !== idPage["P_INGAME"] ? (
+            <tr>
+              <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
+                <input
+                  className="smallButton"
+                  type="button"
+                  value={traduction[this.state.language]["SHOW_SOLUTION"]}
+                />
+              </td>
+            </tr>
+          ) : null}
+          {this.state.page !== idPage["P_INGAME"] ? (
+            <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
                   className="smallButton"
@@ -1052,20 +1153,14 @@ class App extends React.Component {
                 <input
                   className="smallButton"
                   type="button"
-                  value={traduction[this.state.language]["SHOW_SOLUTION"]}
-                />
-                &nbsp;
-                <input
-                  className="smallButton"
-                  type="button"
                   value={traduction[this.state.language]["YES"]}
                   onClick={() => {
                     this.changePage(idPage["P_SOLUTION"]);
                   }}
                 />
               </td>
-            )}
-          </tr>
+            </tr>
+          ) : null}
         </tbody>
       </table>
     );
@@ -1086,8 +1181,22 @@ class App extends React.Component {
                 <img src={home} width="20" alt="home" />
               </button>
               {"#" + this.game.hash}
+              <img
+                src={this.state.actualClipboard}
+                width="30"
+                height="auto"
+                alt="copy"
+                onClick={() => this.copyToClipboard()}
+              />
             </td>
           </tr>
+          {this.state.youWin ? (
+            <tr>
+              <td colSpan={this.game.n}>
+                {traduction[this.state.language]["YOUWIN"]}
+              </td>
+            </tr>
+          ) : null}
           <tr>
             <td colSpan={this.game.n}>
               {traduction[this.state.language]["CODE"] + " : " + this.game.code}
@@ -1215,8 +1324,20 @@ class App extends React.Component {
                 <img src={home} width="20" alt="home" />
               </button>
               {"#" + this.game.hash}
+              <img
+                src={this.state.actualClipboard}
+                width="30"
+                height="auto"
+                alt="copy"
+                onClick={() => this.copyToClipboard()}
+              />
             </td>
           </tr>
+          {this.state.youWin ? (
+            <tr>
+              <td colSpan="3">{traduction[this.state.language]["YOUWIN"]}</td>
+            </tr>
+          ) : null}
           <tr>
             <td colSpan="3">
               {traduction[this.state.language]["CODE"] + " : " + this.game.code}
