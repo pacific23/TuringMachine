@@ -92,8 +92,6 @@ class CustomGame extends Component {
             <td>
               {categ === 1 ? (
                 <div id="bcolor1">
-                  {categ}
-                  <br />
                   <span id="smallText">
                     {traduction[this.props.language]["STEP1"]}
                   </span>
@@ -105,8 +103,6 @@ class CustomGame extends Component {
             <td>
               {categ === 2 ? (
                 <div id="bcolor2">
-                  {categ}
-                  <br />
                   <span id="smallText">
                     {traduction[this.props.language]["STEP2"]}
                   </span>
@@ -118,8 +114,6 @@ class CustomGame extends Component {
             <td>
               {categ === 3 ? (
                 <div id="bcolor3">
-                  {categ}
-                  <br />
                   <span id="smallText">
                     {traduction[this.props.language]["STEP3"]}
                   </span>
