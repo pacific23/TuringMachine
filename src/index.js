@@ -28,6 +28,7 @@ class App extends React.Component {
     landscapeMode: true,
     sizeImage: 1,
     sizeFont: 24,
+    smallSizeFont: 15,
     page: 0,
     historicalData: false,
     language: 1,
@@ -131,12 +132,14 @@ class App extends React.Component {
       this.setState({
         sizeImage: Math.min(sizex * 0.7, sizey / 2),
         sizeFont: Math.max(sizex * 0.06, 20),
+        smallSizeFont: Math.max(sizex * 0.04, 14),
         landscapeMode: sizex < sizey ? false : true
       });
     } else {
       this.setState({
         sizeImage: Math.min(sizex / 2, sizey - 200),
         sizeFont: Math.max(sizex * 0.03, 20),
+        smallSizeFont: Math.max(sizex * 0.02, 14),
         landscapeMode: sizex < sizey ? false : true
       });
     }
@@ -281,6 +284,7 @@ class App extends React.Component {
           <CustomGame
             landscapeMode={this.state.landscapeMode}
             language={this.state.language}
+            smallSizeFont={this.state.smallSizeFont}
             changePage={(page) => this.changePage(page)}
             advancedSettings={this.state.advancedSettings}
             clickAdvanced={(column, row) => this.clickAdvanced(column, row)}

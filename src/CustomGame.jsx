@@ -92,7 +92,7 @@ class CustomGame extends Component {
             <td>
               {categ === 1 ? (
                 <div id="bcolor1">
-                  <span id="smallText">
+                  <span style={{ fontSize: this.props.smallSizeFont }}>
                     {traduction[this.props.language]["STEP1"]}
                   </span>
                 </div>
@@ -103,7 +103,7 @@ class CustomGame extends Component {
             <td>
               {categ === 2 ? (
                 <div id="bcolor2">
-                  <span id="smallText">
+                  <span style={{ fontSize: this.props.smallSizeFont }}>
                     {traduction[this.props.language]["STEP2"]}
                   </span>
                 </div>
@@ -114,7 +114,7 @@ class CustomGame extends Component {
             <td>
               {categ === 3 ? (
                 <div id="bcolor3">
-                  <span id="smallText">
+                  <span style={{ fontSize: this.props.smallSizeFont }}>
                     {traduction[this.props.language]["STEP3"]}
                   </span>
                 </div>
@@ -170,13 +170,14 @@ class CustomGame extends Component {
             : "advButton"
         }
         type="button"
+        style={{ fontSize: this.props.smallSizeFont }}
         onClick={() => this.props.clickAdvanced(column, row)}
       >
         {column === 1 ? (
           <span>
             {traduction[this.props.language][textValue]}
             <br />
-            <span id="verySmallText">
+            <span style={{ fontSize: this.props.smallSizeFont - 3 }}>
               {traduction[this.props.language][textValue + "SUB"]}
             </span>
           </span>
