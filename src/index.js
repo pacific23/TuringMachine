@@ -41,10 +41,15 @@ class App extends React.Component {
     language: 1,
     hashValue: "",
     codeValue: "",
+    roundValue: "",
+    questionValue: "",
     advancedSettings: [0, 0, 1, 1],
     actualClipboard: clipboard,
     wrongCode: false,
-    youWin: false
+    youWin: false,
+    winSolo: 0,
+    soloPlay: false,
+    askSolo: false
   };
   game = {
     idPartie: 0,
@@ -195,6 +200,21 @@ class App extends React.Component {
     this.game.sortedInd.sort((a, b) => (a > b ? 1 : -1));
   }
 
+  goCompetitive() {
+    this.state.soloPlay = false;
+    this.changePage(idPage["P_INGAME"]);
+  }
+
+  goSolo() {
+    this.state.soloPlay = true;
+    this.changePage(idPage["P_INGAME"]);
+  }
+
+  loadHistoricalGame(url) {
+    this.state.askSolo = true;
+    this.loadGame(url);
+  }
+
   loadGame(url) {
     this.changePage(idPage["P_LOADING"]);
     var xhr = new XMLHttpRequest();
@@ -220,13 +240,18 @@ class App extends React.Component {
         this.game.ind = jsonResponse["ind"];
         this.game.law = jsonResponse["law"];
         this.game.crypt = jsonResponse["crypt"];
+        if (this.game.m > 0) {
+          this.state.soloPlay = false;
+          this.state.askSolo = false;
+        }
         if (this.game.m == 1) {
           this.shuffleIndFake();
         }
         if (this.game.m == 2) {
           this.sortInd();
         }
-        this.changePage(idPage["P_INGAME"]);
+        if (this.state.askSolo) this.changePage(idPage["P_ASKSOLO"]);
+        else this.changePage(idPage["P_INGAME"]);
       } else {
         this.changePage(idPage["P_ERROR"]);
       }
@@ -246,6 +271,7 @@ class App extends React.Component {
 
   quickGame() {
     if (this.state.hashValue.length > 0) {
+      this.state.askSolo = true;
       this.loadGame("h=" + this.state.hashValue.toUpperCase());
     } else {
       this.loadGame("s=0");
@@ -257,10 +283,12 @@ class App extends React.Component {
   }
 
   hashGame() {
+    this.state.askSolo = true;
     this.loadGame("h=" + this.state.hashValue.toUpperCase());
   }
 
   playAdvanced() {
+    this.state.soloPlay = this.state.advancedSettings[0] === 1;
     this.loadGame(
       "m=" +
         this.state.advancedSettings[1] +
@@ -277,11 +305,16 @@ class App extends React.Component {
       actualClipboard: clipboard,
       hashValue: "",
       codeValue: "",
+      roundValue: "",
+      questionValue: "",
       wrongCode: false,
-      youWin: false
+      youWin: false,
+      winSolo: 0
     });
     if (newPage === 0) {
       this.state.advancedSettings = [0, 0, 1, 1];
+      this.state.soloPlay = false;
+      this.state.askSolo = false;
     }
   }
 
@@ -296,10 +329,42 @@ class App extends React.Component {
     this.setState({ codeValue: value });
   }
 
+  handleChangeRound(value) {
+    value = value.replace(" ", "");
+    this.setState({ roundValue: value });
+  }
+
+  handleChangeQuestion(value) {
+    value = value.replace(" ", "");
+    this.setState({ questionValue: value });
+  }
+
   testCode() {
     if (this.state.codeValue == this.game.code) {
       this.changePage(idPage["P_SOLUTION"]);
       this.setState({ youWin: true });
+    } else {
+      this.setState({ wrongCode: true });
+    }
+  }
+  testCodeSolo() {
+    if (this.state.codeValue == this.game.code) {
+      var roundMachine = Math.ceil(this.game.par / 3);
+      var win = 0; // 0 : défaite, 1 : tie, 2 : victory
+      if (this.state.roundValue < roundMachine) {
+        win = 2;
+      } else {
+        if (this.state.roundValue == roundMachine) {
+          if (this.state.questionValue < this.game.par) {
+            win = 2;
+          }
+          if (this.state.questionValue == this.game.par) {
+            win = 1;
+          }
+        }
+      }
+      this.changePage(idPage["P_SOLUTION"]);
+      this.setState({ youWin: true, winSolo: win });
     } else {
       this.setState({ wrongCode: true });
     }
@@ -364,8 +429,14 @@ class App extends React.Component {
         </div>
       );
     }
+    if (this.state.page === idPage["P_ASKSOLO"]) {
+      return <div className="App">{this.getSoloQuestionPage()}</div>;
+    }
     if (this.state.page === idPage["P_TESTCODE"]) {
       return <div className="App">{this.getInputCodePage()}</div>;
+    }
+    if (this.state.page === idPage["P_TESTCODESOLO"]) {
+      return <div className="App">{this.getInputSoloCodePage()}</div>;
     }
     if (this.state.page === idPage["P_ERROR"]) {
       return (
@@ -463,12 +534,101 @@ class App extends React.Component {
           className="button"
           type="button"
           value={"#" + hash}
-          onClick={() => this.loadGame("h=" + hash)}
+          onClick={() => this.loadHistoricalGame("h=" + hash)}
         />
         <br />
         &nbsp;
       </div>
     ));
+  }
+
+  getSoloQuestionPage() {
+    return (
+      <table className="mainTab">
+        <tbody>
+          <tr>
+            <td>
+              <input
+                className="button"
+                type="button"
+                value={traduction[this.state.language]["COMPETITIVE"]}
+                onClick={() => this.goCompetitive()}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                className="button"
+                type="button"
+                value={traduction[this.state.language]["SOLO"]}
+                onClick={() => this.goSolo()}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
+
+  getInputSoloCodePage() {
+    return (
+      <table className="mainTab">
+        <tbody>
+          <tr>
+            <td>
+              {this.state.wrongCode ? (
+                <span>{traduction[this.state.language]["FALSECODE"]}</span>
+              ) : (
+                <span>&nbsp;</span>
+              )}
+              <br />
+              <input
+                autoFocus
+                className="code"
+                type="text"
+                defaultValue=""
+                placeholder={traduction[this.state.language]["INPUTCODE"]}
+                size="15"
+                onChange={(e) => this.handleChangeCode(e.target.value)}
+              />
+              <br />
+              <input
+                className="code"
+                type="text"
+                defaultValue=""
+                placeholder={traduction[this.state.language]["INPUTROUND"]}
+                size="15"
+                onChange={(e) => this.handleChangeRound(e.target.value)}
+              />
+              <br />
+              <input
+                className="code"
+                type="text"
+                defaultValue=""
+                placeholder={traduction[this.state.language]["INPUTQUESTION"]}
+                size="15"
+                onChange={(e) => this.handleChangeQuestion(e.target.value)}
+              />
+              <br />
+              <input
+                className="smallButton"
+                type="button"
+                value={traduction[this.state.language]["TESTCODE"]}
+                onClick={() => this.testCodeSolo()}
+              />
+              &nbsp;
+              <input
+                className="smallButton"
+                type="button"
+                value={traduction[this.state.language]["CANCEL"]}
+                onClick={() => this.changePage(idPage["P_INGAME"])}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    );
   }
 
   getInputCodePage() {
@@ -578,6 +738,9 @@ class App extends React.Component {
                 alt="copy"
                 onClick={() => this.copyToClipboard()}
               />
+              {this.state.soloPlay ? (
+                <span>&nbsp;{traduction[this.state.language]["SOLOMODE"]}</span>
+              ) : null}
             </td>
           </tr>
           <tr>
@@ -590,7 +753,7 @@ class App extends React.Component {
           </tr>
           {this.game.m == 0 ? (
             <tr>
-              <td colspan="4" align="left">
+              <td colSpan="4" align="left">
                 {traduction[this.state.language]["CRITERIA"]} :
               </td>
               {this.game.n > 4 ? <td></td> : null}
@@ -599,7 +762,7 @@ class App extends React.Component {
           ) : null}
           {this.game.m == 1 ? (
             <tr>
-              <td colspan="4" align="left">
+              <td colSpan="4" align="left">
                 {traduction[this.state.language]["CRITERIADOUBLE"]} :
               </td>
               {this.game.n > 4 ? <td></td> : null}
@@ -691,7 +854,7 @@ class App extends React.Component {
             </tr>
           ) : null}
           <tr>
-            <td colspan="4" align="left">
+            <td colSpan="4" align="left">
               {traduction[this.state.language]["VERIFIER"]} :
             </td>
             {this.game.n > 4 ? <td></td> : null}
@@ -760,7 +923,7 @@ class App extends React.Component {
           </tr>
           {this.game.m == 2 ? (
             <tr>
-              <td colspan="4" align="left">
+              <td colSpan="4" align="left">
                 {traduction[this.state.language]["CRITERIAMIXED"]} :
               </td>
               {this.game.n > 4 ? <td></td> : null}
@@ -810,12 +973,21 @@ class App extends React.Component {
           {this.state.page === idPage["P_INGAME"] ? (
             <tr>
               <td colSpan={this.game.n}>
-                <input
-                  className="smallButton"
-                  type="button"
-                  value={traduction[this.state.language]["CHECKCODE"]}
-                  onClick={() => this.changePage(idPage["P_TESTCODE"])}
-                />
+                {this.state.soloPlay ? (
+                  <input
+                    className="smallButton"
+                    type="button"
+                    value={traduction[this.state.language]["CHECKCODESOLO"]}
+                    onClick={() => this.changePage(idPage["P_TESTCODESOLO"])}
+                  />
+                ) : (
+                  <input
+                    className="smallButton"
+                    type="button"
+                    value={traduction[this.state.language]["CHECKCODE"]}
+                    onClick={() => this.changePage(idPage["P_TESTCODE"])}
+                  />
+                )}
                 &nbsp;&nbsp;
                 <input
                   className="smallButton"
@@ -882,6 +1054,12 @@ class App extends React.Component {
                 alt="copy"
                 onClick={() => this.copyToClipboard()}
               />
+              {this.state.soloPlay ? (
+                <span>
+                  <br />
+                  {traduction[this.state.language]["SOLOMODE"]}
+                </span>
+              ) : null}
             </td>
           </tr>
           <tr id="spotTop">
@@ -1054,7 +1232,7 @@ class App extends React.Component {
           ) : null}
           {this.game.m == 2 ? (
             <tr>
-              <td colspan="2" align="left">
+              <td colSpan="2" align="left">
                 {traduction[this.state.language]["CRITERIAMIXED"]} :
               </td>
             </tr>
@@ -1099,7 +1277,7 @@ class App extends React.Component {
               </td>
             </tr>
           ) : null}
-          {this.state.page === idPage["P_INGAME"] ? (
+          {this.state.page === idPage["P_INGAME"] && !this.state.soloPlay ? (
             <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
@@ -1107,6 +1285,18 @@ class App extends React.Component {
                   type="button"
                   value={traduction[this.state.language]["CHECKCODE"]}
                   onClick={() => this.changePage(idPage["P_TESTCODE"])}
+                />
+              </td>
+            </tr>
+          ) : null}
+          {this.state.page === idPage["P_INGAME"] && this.state.soloPlay ? (
+            <tr>
+              <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
+                <input
+                  className="smallButton"
+                  type="button"
+                  value={traduction[this.state.language]["CHECKCODESOLO"]}
+                  onClick={() => this.changePage(idPage["P_TESTCODESOLO"])}
                 />
               </td>
             </tr>
@@ -1186,10 +1376,45 @@ class App extends React.Component {
               />
             </td>
           </tr>
-          {this.state.youWin ? (
+          {this.state.youWin && !this.state.soloPlay ? (
             <tr>
               <td colSpan={this.game.n}>
                 {traduction[this.state.language]["YOUWIN"]}
+              </td>
+            </tr>
+          ) : null}
+          {this.state.youWin &&
+          this.state.soloPlay &&
+          this.state.winSolo === 0 ? (
+            <tr>
+              <td colSpan={this.game.n}>
+                {traduction[this.state.language]["WINSOLO0"]}
+              </td>
+            </tr>
+          ) : null}
+          {this.state.youWin &&
+          this.state.soloPlay &&
+          this.state.winSolo === 1 ? (
+            <tr>
+              <td colSpan={this.game.n}>
+                {traduction[this.state.language]["WINSOLO1"]}
+              </td>
+            </tr>
+          ) : null}
+          {this.state.youWin &&
+          this.state.soloPlay &&
+          this.state.winSolo === 2 ? (
+            <tr>
+              <td colSpan={this.game.n}>
+                {traduction[this.state.language]["WINSOLO2"]}
+              </td>
+            </tr>
+          ) : null}
+          {this.state.soloPlay ? (
+            <tr>
+              <td colSpan={this.game.n}>
+                MACHINE : {Math.ceil(this.game.par / 3)} ROUNDS /{" "}
+                {this.game.par} QUESTIONS
               </td>
             </tr>
           ) : null}
@@ -1329,9 +1554,38 @@ class App extends React.Component {
               />
             </td>
           </tr>
-          {this.state.youWin ? (
+          {this.state.youWin && !this.state.soloPlay ? (
             <tr>
               <td colSpan="3">{traduction[this.state.language]["YOUWIN"]}</td>
+            </tr>
+          ) : null}
+          {this.state.youWin &&
+          this.state.soloPlay &&
+          this.state.winSolo === 0 ? (
+            <tr>
+              <td colSpan="3">{traduction[this.state.language]["WINSOLO0"]}</td>
+            </tr>
+          ) : null}
+          {this.state.youWin &&
+          this.state.soloPlay &&
+          this.state.winSolo === 1 ? (
+            <tr>
+              <td colSpan="3">{traduction[this.state.language]["WINSOLO1"]}</td>
+            </tr>
+          ) : null}
+          {this.state.youWin &&
+          this.state.soloPlay &&
+          this.state.winSolo === 2 ? (
+            <tr>
+              <td colSpan="3">{traduction[this.state.language]["WINSOLO2"]}</td>
+            </tr>
+          ) : null}
+          {this.state.soloPlay ? (
+            <tr>
+              <td colSpan="3">
+                MACHINE : {Math.ceil(this.game.par / 3)} ROUNDS /{" "}
+                {this.game.par} QUESTIONS
+              </td>
             </tr>
           ) : null}
           <tr>

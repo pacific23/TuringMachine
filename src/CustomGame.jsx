@@ -19,7 +19,7 @@ class CustomGame extends Component {
       <table className="mainTab">
         <tbody>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               <button
                 id="homeBut"
                 className="smallButton"
@@ -39,7 +39,7 @@ class CustomGame extends Component {
             </td>
           </tr>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               {this.props.landscapeMode ? (
                 <table className="mainTab">
                   <tbody>
@@ -54,13 +54,13 @@ class CustomGame extends Component {
                 <table className="mainTab">
                   <tbody>
                     <tr>
-                      <td colspan="3">{this.getAdvancedTab(1)}</td>
+                      <td colSpan="3">{this.getAdvancedTab(1)}</td>
                     </tr>
                     <tr>
-                      <td colspan="3">{this.getAdvancedTab(2)}</td>
+                      <td colSpan="3">{this.getAdvancedTab(2)}</td>
                     </tr>
                     <tr>
-                      <td colspan="3">{this.getAdvancedTab(3)}</td>
+                      <td colSpan="3">{this.getAdvancedTab(3)}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -126,17 +126,17 @@ class CustomGame extends Component {
         {this.props.landscapeMode ? (
           <tbody>
             <tr>
-              <td colspan="3" id={"bcolor" + categ}>
+              <td colSpan="3" id={"bcolor" + categ}>
                 {this.getAdvancedButton(categ, 0, this.buttonNames[categ][0])}
               </td>
             </tr>
             <tr>
-              <td colspan="3" id={"bcolor" + categ}>
+              <td colSpan="3" id={"bcolor" + categ}>
                 {this.getAdvancedButton(categ, 1, this.buttonNames[categ][1])}
               </td>
             </tr>
             <tr>
-              <td colspan="3" id={"bcolor" + categ}>
+              <td colSpan="3" id={"bcolor" + categ}>
                 {this.getAdvancedButton(categ, 2, this.buttonNames[categ][2])}
               </td>
             </tr>

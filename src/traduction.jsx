@@ -43,7 +43,14 @@ var traduction = {
     CRITERIA: "Cartes Critères",
     CRITERIADOUBLE: "Cartes Critères (2 par vérificateur)",
     CRITERIAMIXED: "Cartes Critères (mélangées)",
-    VERIFIER: "Cartes Vérification"
+    VERIFIER: "Cartes Vérification",
+    SOLOMODE: "(Mode solo)",
+    CHECKCODESOLO: "MACHINE",
+    INPUTROUND: "NOMBRE DE ROUNDS",
+    INPUTQUESTION: "NOMBRE DE QUESTIONS",
+    WINSOLO0: "VOUS AVEZ TROUVE LE CODE MAIS PAS BATTU LA MACHINE",
+    WINSOLO1: "MATCH NUL AVEC LA MACHINE",
+    WINSOLO2: "VICTOIRE !!! VOUS AVEZ BATTU MACHINE !!!"
   },
   1: {
     LANG: "EN",
@@ -89,7 +96,14 @@ var traduction = {
     CRITERIA: "Criteria Cards",
     CRITERIADOUBLE: "Criteria Cards (2 on each verifier)",
     CRITERIAMIXED: "Criteria Cards (mixed)",
-    VERIFIER: "Verification Cards"
+    VERIFIER: "Verification Cards",
+    SOLOMODE: "(Solo mode)",
+    CHECKCODESOLO: "MACHINE",
+    INPUTROUND: "NUMBER OF ROUNDS",
+    INPUTQUESTION: "TOTAL OF QUESTIONS",
+    WINSOLO0: "YOU FIND THE CODE BUT DON'T BEAT THE MACHINE",
+    WINSOLO1: "YOU TIED THE MACHINE",
+    WINSOLO2: "VICTORY!!! YOU BEAT THE MACHINE!!!"
   }
 };
 
