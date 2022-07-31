@@ -45,6 +45,13 @@ class MainMenu extends Component {
               <button
                 className="buttonMain"
                 type="button"
+                onClick={() =>
+                  window.open(
+                    "https://www.pcspace.com/SheetTM.pdf",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
                 style={{ fontSize: this.props.sizeFont }}
               >
                 {traduction[this.props.language]["SHEET"]}
