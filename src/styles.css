@@ -62,8 +62,7 @@ td {
 }
 
 .text {
-  background: url("./images/Search.png") top left no-repeat;
-  height: 30px;
+  background: url("./images/Search.png") left no-repeat;
   padding-left: 25px;
 
   font-weight: bold;
