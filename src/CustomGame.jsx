@@ -28,7 +28,7 @@ class CustomGame extends Component {
               >
                 <img src={home} width="20" alt="home" />
               </button>
-              <table className="compSolTab">
+              <table className="mainTab">
                 <tbody>
                   <tr>
                     <td>{this.getAdvancedButton(0, 0, "COMPETITIVE")}&nbsp;</td>
