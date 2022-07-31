@@ -134,7 +134,7 @@ class App extends React.Component {
       });
     } else {
       this.setState({
-        sizeImage: Math.min(sizex / 2, sizey - 100),
+        sizeImage: Math.min(sizex / 2, sizey - 200),
         sizeFont: Math.max(sizex * 0.03, 20),
         landscapeMode: sizex < sizey ? false : true
       });
