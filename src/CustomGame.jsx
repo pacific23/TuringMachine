@@ -75,6 +75,7 @@ class CustomGame extends Component {
                 type="button"
                 value={traduction[this.props.language]["PLAY"]}
                 onClick={() => this.props.playAdvanced()}
+                style={{ fontSize: this.props.smallSizeFont }}
               />
             </td>
             <td></td>
