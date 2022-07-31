@@ -109,7 +109,7 @@ form {
 }
 
 .text {
-  background: url("./images/Search.png") left 5px no-repeat;
+  background: url("./images/Search.png") left 20px no-repeat;
   font-weight: bold;
   font-size: 20px;
   caret-color: #000;
