@@ -483,7 +483,6 @@ class App extends React.Component {
                 <span>&nbsp;</span>
               )}
               <br />
-              <br />
               <input
                 autoFocus
                 className="code"
