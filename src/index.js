@@ -15,9 +15,14 @@ import history from "./images/History.png";
 import home from "./images/Home.png";
 import langFR from "./images/LangFR.png";
 import langEN from "./images/LangEN.png";
+import symb0 from "./images/Symb0.png";
+import symb1 from "./images/Symb1.png";
+import symb2 from "./images/Symb2.png";
+import symb3 from "./images/Symb3.png";
 
 const imgLang = [langFR, langEN];
 const imgBox = [boxFR, boxEN];
+const imgSymb = [symb0, symb1, symb2, symb3];
 const cookies = new Cookies();
 
 var userID = "";
@@ -137,7 +142,7 @@ class App extends React.Component {
       });
     } else {
       this.setState({
-        sizeImage: Math.min(sizex / 2, sizey - 200),
+        sizeImage: Math.min(sizex / 2, sizey - 150),
         sizeFont: Math.max(sizex * 0.03, 20),
         smallSizeFont: Math.max(sizex * 0.02, 14),
         landscapeMode: sizex < sizey ? false : true
@@ -199,10 +204,10 @@ class App extends React.Component {
         this.game.ind = jsonResponse["ind"];
         this.game.law = jsonResponse["law"];
         this.game.crypt = jsonResponse["crypt"];
-        if (this.game.m === 1) {
+        if (this.game.m == 1) {
           this.shuffleIndFake();
         }
-        if (this.game.m === 2) {
+        if (this.game.m == 2) {
           this.sortInd();
         }
         this.changePage(idPage["P_INGAME"]);
@@ -514,36 +519,51 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td id="spot">A</td>
-            <td id="spot">B</td>
-            <td id="spot">C</td>
-            <td id="spot">D</td>
-            {this.game.n > 4 ? <td id="spot">E</td> : null}
-            {this.game.n > 5 ? <td id="spot">F</td> : null}
+            <td id="spotLeft">A</td>
+            <td id="spotLeft">B</td>
+            <td id="spotLeft">C</td>
+            <td>D</td>
+            {this.game.n > 4 ? <td id="spotRight">E</td> : null}
+            {this.game.n > 5 ? <td id="spotRight">F</td> : null}
           </tr>
-          <tr>
-            <td colspan="4" align="left">
-              {traduction[this.state.language]["CRITERIA"]} :
-            </td>
-            {this.game.n > 4 ? <td></td> : null}
-            {this.game.n > 5 ? <td></td> : null}
-          </tr>
+          {this.game.m == 0 ? (
+            <tr>
+              <td colspan="4" align="left">
+                {traduction[this.state.language]["CRITERIA"]} :
+              </td>
+              {this.game.n > 4 ? <td></td> : null}
+              {this.game.n > 5 ? <td></td> : null}
+            </tr>
+          ) : (
+            <div></div>
+          )}
+          {this.game.m == 1 ? (
+            <tr>
+              <td colspan="4" align="left">
+                {traduction[this.state.language]["CRITERIADOUBLE"]} :
+              </td>
+              {this.game.n > 4 ? <td></td> : null}
+              {this.game.n > 5 ? <td></td> : null}
+            </tr>
+          ) : (
+            <div></div>
+          )}
           {this.game.m != 2 ? (
             <tr>
-              <td>
+              <td id="spotLeft">
                 <input className="ind" type="button" value={this.game.ind[0]} />
               </td>
-              <td>
+              <td id="spotLeft">
                 <input className="ind" type="button" value={this.game.ind[1]} />
               </td>
-              <td>
+              <td id="spotLeft">
                 <input className="ind" type="button" value={this.game.ind[2]} />
               </td>
               <td>
                 <input className="ind" type="button" value={this.game.ind[3]} />
               </td>
               {this.game.n > 4 ? (
-                <td>
+                <td id="spotRight">
                   <input
                     className="ind"
                     type="button"
@@ -552,7 +572,7 @@ class App extends React.Component {
                 </td>
               ) : null}
               {this.game.n > 5 ? (
-                <td>
+                <td id="spotRight">
                   <input
                     className="ind"
                     type="button"
@@ -564,21 +584,21 @@ class App extends React.Component {
           ) : null}
           {this.game.m == 1 ? (
             <tr>
-              <td>
+              <td id="spotLeft">
                 <input
                   className="ind"
                   type="button"
                   value={this.game.fake[0]}
                 />
               </td>
-              <td>
+              <td id="spotLeft">
                 <input
                   className="ind"
                   type="button"
                   value={this.game.fake[1]}
                 />
               </td>
-              <td>
+              <td id="spotLeft">
                 <input
                   className="ind"
                   type="button"
@@ -593,7 +613,7 @@ class App extends React.Component {
                 />
               </td>
               {this.game.n > 4 ? (
-                <td>
+                <td id="spotRight">
                   <input
                     className="ind"
                     type="button"
@@ -602,7 +622,7 @@ class App extends React.Component {
                 </td>
               ) : null}
               {this.game.n > 5 ? (
-                <td>
+                <td id="spotRight">
                   <input
                     className="ind"
                     type="button"
@@ -621,13 +641,76 @@ class App extends React.Component {
           </tr>
 
           <tr id={"color" + this.game.color}>
-            <td>{this.game.crypt[0]}</td>
-            <td>{this.game.crypt[1]}</td>
-            <td>{this.game.crypt[2]}</td>
-            <td>{this.game.crypt[3]}</td>
-            {this.game.n > 4 ? <td>{this.game.crypt[4]}</td> : null}
-            {this.game.n > 5 ? <td>{this.game.crypt[5]}</td> : null}
+            <td id="spotLeft">
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[0]}
+            </td>
+            <td id="spotLeft">
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[1]}
+            </td>
+            <td id="spotLeft">
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[2]}
+            </td>
+            <td>
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[3]}
+            </td>
+            {this.game.n > 4 ? (
+              <td id="spotRight">
+                <img
+                  src={imgSymb[this.game.color]}
+                  alt="symbol"
+                  width="20px"
+                  height="auto"
+                />
+                {" " + this.game.crypt[4]}
+              </td>
+            ) : null}
+            {this.game.n > 5 ? (
+              <td id="spotLeft">
+                <img
+                  src={imgSymb[this.game.color]}
+                  alt="symbol"
+                  width="20px"
+                  height="auto"
+                />
+                {" " + this.game.crypt[5]}
+              </td>
+            ) : null}
           </tr>
+          {this.game.m == 2 ? (
+            <tr>
+              <td colspan="4" align="left">
+                {traduction[this.state.language]["CRITERIAMIXED"]} :
+              </td>
+              {this.game.n > 4 ? <td></td> : null}
+              {this.game.n > 5 ? <td></td> : null}
+            </tr>
+          ) : (
+            <div></div>
+          )}
           {this.game.m == 2 ? (
             <tr>
               <td colSpan={this.game.n}>
@@ -728,8 +811,8 @@ class App extends React.Component {
               {"#" + this.game.hash}
             </td>
           </tr>
-          <tr>
-            <td id="spot">A</td>
+          <tr id="spotTop">
+            <td>A</td>
             {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[0]} />
@@ -744,10 +827,18 @@ class App extends React.Component {
                 />
               </td>
             ) : null}
-            <td id={"color" + this.game.color}>{this.game.crypt[0]}</td>
+            <td id={"color" + this.game.color}>
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[0]}
+            </td>
           </tr>
-          <tr>
-            <td id="spot">B</td>
+          <tr id="spotTop">
+            <td>B</td>
             {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[1]} />
@@ -762,10 +853,18 @@ class App extends React.Component {
                 />
               </td>
             ) : null}
-            <td id={"color" + this.game.color}>{this.game.crypt[1]}</td>
+            <td id={"color" + this.game.color}>
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[1]}
+            </td>
           </tr>
-          <tr>
-            <td id="spot">C</td>
+          <tr id="spotTop">
+            <td>C</td>
             {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[2]} />
@@ -780,10 +879,18 @@ class App extends React.Component {
                 />
               </td>
             ) : null}
-            <td id={"color" + this.game.color}>{this.game.crypt[2]}</td>
+            <td id={"color" + this.game.color}>
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[2]}
+            </td>
           </tr>
           <tr>
-            <td id="spot">D</td>
+            <td>D</td>
             {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[3]} />
@@ -798,11 +905,19 @@ class App extends React.Component {
                 />
               </td>
             ) : null}
-            <td id={"color" + this.game.color}>{this.game.crypt[3]}</td>
+            <td id={"color" + this.game.color}>
+              <img
+                src={imgSymb[this.game.color]}
+                alt="symbol"
+                width="20px"
+                height="auto"
+              />
+              {" " + this.game.crypt[3]}
+            </td>
           </tr>
           {this.game.n > 4 ? (
-            <tr>
-              <td id="spot">E</td>
+            <tr id="spotBottom">
+              <td>E</td>
               {this.game.m != 2 ? (
                 <td>
                   <input
@@ -821,12 +936,20 @@ class App extends React.Component {
                   />
                 </td>
               ) : null}
-              <td id={"color" + this.game.color}>{this.game.crypt[4]}</td>
+              <td id={"color" + this.game.color}>
+                <img
+                  src={imgSymb[this.game.color]}
+                  alt="symbol"
+                  width="20px"
+                  height="auto"
+                />
+                {" " + this.game.crypt[4]}
+              </td>
             </tr>
           ) : null}
           {this.game.n > 5 ? (
-            <tr>
-              <td id="spot">F</td>
+            <tr id="spotBottom">
+              <td>F</td>
               {this.game.m != 2 ? (
                 <td>
                   <input
@@ -845,9 +968,26 @@ class App extends React.Component {
                   />
                 </td>
               ) : null}
-              <td id={"color" + this.game.color}>{this.game.crypt[5]}</td>
+              <td id={"color" + this.game.color}>
+                <img
+                  src={imgSymb[this.game.color]}
+                  alt="symbol"
+                  width="20px"
+                  height="auto"
+                />
+                {" " + this.game.crypt[5]}
+              </td>
             </tr>
           ) : null}
+          {this.game.m == 2 ? (
+            <tr>
+              <td colspan="2" align="left">
+                {traduction[this.state.language]["CRITERIAMIXED"]} :
+              </td>
+            </tr>
+          ) : (
+            <div></div>
+          )}
           {this.game.m == 2 ? (
             <tr>
               <td colSpan="2">
@@ -954,12 +1094,12 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td id="spot">A</td>
-            <td id="spot">B</td>
-            <td id="spot">C</td>
-            <td id="spot">D</td>
-            {this.game.n > 4 ? <td id="spot">E</td> : null}
-            {this.game.n > 5 ? <td id="spot">F</td> : null}
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+            <td>D</td>
+            {this.game.n > 4 ? <td>E</td> : null}
+            {this.game.n > 5 ? <td>F</td> : null}
           </tr>
           <tr>
             <td>
@@ -1083,7 +1223,7 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td id="spot">A</td>
+            <td>A</td>
             <td colSpan="2">
               <button
                 id="solBut"
@@ -1099,7 +1239,7 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td id="spot">B</td>
+            <td>B</td>
             <td colSpan="2">
               <button
                 id="solBut"
@@ -1115,7 +1255,7 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td id="spot">C</td>
+            <td>C</td>
             <td colSpan="2">
               <button
                 id="solBut"
@@ -1131,7 +1271,7 @@ class App extends React.Component {
             </td>
           </tr>
           <tr>
-            <td id="spot">D</td>
+            <td>D</td>
             <td colSpan="2">
               <button
                 id="solBut"
@@ -1148,7 +1288,7 @@ class App extends React.Component {
           </tr>
           {this.game.n > 4 ? (
             <tr>
-              <td id="spot">E</td>
+              <td>E</td>
               <td colSpan="2">
                 <button
                   id="solBut"
@@ -1166,7 +1306,7 @@ class App extends React.Component {
           ) : null}
           {this.game.n > 5 ? (
             <tr>
-              <td id="spot">F</td>
+              <td>F</td>
               <td colSpan="2">
                 <button
                   id="solBut"

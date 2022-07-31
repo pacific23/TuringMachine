@@ -51,8 +51,20 @@ tr td {
   right: 10px;
 }
 
-#spot {
-  color: #555;
+#spotLeft {
+  border-right: 2px solid;
+}
+
+#spotRight {
+  border-left: 2px solid;
+}
+
+#spotTop {
+  border-bottom: 2px solid;
+}
+
+#spotBottom {
+  border-top: 2px solid;
 }
 
 #color0 {

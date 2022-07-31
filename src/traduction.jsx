@@ -35,6 +35,8 @@ var traduction = {
     STEP2: "Difficulté",
     STEP3: "Longueur",
     CRITERIA: "Cartes Critères",
+    CRITERIADOUBLE: "Cartes Critères (2 par vérificateur)",
+    CRITERIAMIXED: "Cartes Critères (mélangées)",
     VERIFIER: "Cartes Vérification"
   },
   1: {
@@ -73,6 +75,8 @@ var traduction = {
     STEP2: "Difficulty",
     STEP3: "Duration",
     CRITERIA: "Criteria Cards",
+    CRITERIADOUBLE: "Criteria Cards (2 on each verifier)",
+    CRITERIAMIXED: "Criteria Cards (mixed)",
     VERIFIER: "Verification Cards"
   }
 };
