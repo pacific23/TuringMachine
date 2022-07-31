@@ -297,7 +297,7 @@ class App extends React.Component {
   }
 
   testCode() {
-    if (this.state.codeValue === this.game.code) {
+    if (this.state.codeValue == this.game.code) {
       this.changePage(idPage["P_SOLUTION"]);
       this.setState({ youWin: true });
     } else {
@@ -478,37 +478,35 @@ class App extends React.Component {
           <tr>
             <td>
               {this.state.wrongCode ? (
-                <div>{traduction[this.state.language]["FALSECODE"]}</div>
+                <span>{traduction[this.state.language]["FALSECODE"]}</span>
               ) : (
-                <div>&nbsp;</div>
+                <span>&nbsp;</span>
               )}
               <br />
               <br />
-              <form>
-                <input
-                  className="code"
-                  type="text"
-                  defaultValue=""
-                  placeholder={traduction[this.state.language]["INPUTCODE"]}
-                  size="15"
-                  onChange={(e) => this.handleChangeCode(e.target.value)}
-                />
-                <br />
-                <br />
-                <input
-                  className="smallButton"
-                  type="submit"
-                  value={traduction[this.state.language]["TESTCODE"]}
-                  onClick={() => this.testCode()}
-                />
-                &nbsp;
-                <input
-                  className="smallButton"
-                  type="button"
-                  value={traduction[this.state.language]["CANCEL"]}
-                  onClick={() => this.changePage(idPage["P_INGAME"])}
-                />
-              </form>
+              <input
+                autoFocus
+                className="code"
+                type="text"
+                defaultValue=""
+                placeholder={traduction[this.state.language]["INPUTCODE"]}
+                size="15"
+                onChange={(e) => this.handleChangeCode(e.target.value)}
+              />
+              <br />
+              <input
+                className="smallButton"
+                type="button"
+                value={traduction[this.state.language]["TESTCODE"]}
+                onClick={() => this.testCode()}
+              />
+              &nbsp;
+              <input
+                className="smallButton"
+                type="button"
+                value={traduction[this.state.language]["CANCEL"]}
+                onClick={() => this.changePage(idPage["P_INGAME"])}
+              />
             </td>
           </tr>
         </tbody>
