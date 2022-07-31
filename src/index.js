@@ -269,6 +269,26 @@ class App extends React.Component {
     xhr.send();
   }
 
+  setData(win) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("load", () => {
+      var data = xhr.responseText;
+    });
+    xhr.open(
+      "GET",
+      "https://www.pcspace.com/tl/recordSolo.php?i=" +
+        this.game.idPartie +
+        "&r=" +
+        this.state.roundValue +
+        "&q=" +
+        this.state.questionValue +
+        "&w=" +
+        win
+    );
+    xhr.send();
+  }
+
   quickGame() {
     if (this.state.hashValue.length > 0) {
       this.state.askSolo = true;
@@ -365,6 +385,7 @@ class App extends React.Component {
       }
       this.changePage(idPage["P_SOLUTION"]);
       this.setState({ youWin: true, winSolo: win });
+      this.setData(win);
     } else {
       this.setState({ wrongCode: true });
     }
