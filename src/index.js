@@ -1311,7 +1311,6 @@ class App extends React.Component {
                   onChange={(e) => this.handleChange(e.target.value)}
                 />
               </form>
-              <br />
               <img
                 src={imgBox[this.state.language]}
                 width={this.state.sizeImage}

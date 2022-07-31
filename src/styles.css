@@ -61,6 +61,11 @@ td {
   color: #8067ad;
 }
 
+form {
+  background-color: rgb(97, 203, 106);
+  padding: 0px 0px;
+}
+
 .text {
   background: url("./images/Search.png") left no-repeat;
   font-weight: bold;
