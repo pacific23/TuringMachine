@@ -1282,23 +1282,16 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
-              <input
-                autoFocus
-                className="text"
-                type="text"
-                defaultValue=""
-                placeholder={traduction[this.state.language]["SEARCH"]}
-                size="10"
-                onChange={(e) => this.handleChange(e.target.value)}
-              />{" "}
-              <br />
-              <input
-                className="smallButton"
-                type="button"
-                value={traduction[this.state.language]["LOAD"]}
-                onClick={() => this.hashGame()}
-              />
-              <br />
+              <form onSubmit={() => this.hashGame()}>
+                <input
+                  className="text"
+                  type="text"
+                  defaultValue=""
+                  placeholder={traduction[this.state.language]["SEARCH"]}
+                  size="10"
+                  onChange={(e) => this.handleChange(e.target.value)}
+                />
+              </form>
               <br />
               {this.state.page !== idPage["P_MAIN"] ? (
                 <button
