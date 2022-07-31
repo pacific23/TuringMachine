@@ -521,7 +521,14 @@ class App extends React.Component {
             {this.game.n > 4 ? <td id="spot">E</td> : null}
             {this.game.n > 5 ? <td id="spot">F</td> : null}
           </tr>
-          {this.game.m !== 2 ? (
+          <tr>
+            <td colspan="4" align="left">
+              {traduction[this.state.language]["CRITERIA"]} :
+            </td>
+            {this.game.n > 4 ? <td></td> : null}
+            {this.game.n > 5 ? <td></td> : null}
+          </tr>
+          {this.game.m != 2 ? (
             <tr>
               <td>
                 <input className="ind" type="button" value={this.game.ind[0]} />
@@ -555,8 +562,7 @@ class App extends React.Component {
               ) : null}
             </tr>
           ) : null}
-
-          {this.game.m === 1 ? (
+          {this.game.m == 1 ? (
             <tr>
               <td>
                 <input
@@ -606,6 +612,14 @@ class App extends React.Component {
               ) : null}
             </tr>
           ) : null}
+          <tr>
+            <td colspan="4" align="left">
+              {traduction[this.state.language]["VERIFIER"]} :
+            </td>
+            {this.game.n > 4 ? <td></td> : null}
+            {this.game.n > 5 ? <td></td> : null}
+          </tr>
+
           <tr id={"color" + this.game.color}>
             <td>{this.game.crypt[0]}</td>
             <td>{this.game.crypt[1]}</td>
@@ -614,7 +628,7 @@ class App extends React.Component {
             {this.game.n > 4 ? <td>{this.game.crypt[4]}</td> : null}
             {this.game.n > 5 ? <td>{this.game.crypt[5]}</td> : null}
           </tr>
-          {this.game.m === 2 ? (
+          {this.game.m == 2 ? (
             <tr>
               <td colSpan={this.game.n}>
                 <input
@@ -702,7 +716,7 @@ class App extends React.Component {
       <table className="mainTab">
         <tbody>
           <tr>
-            <td colSpan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
+            <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
               <button
                 id="homeBut"
                 className="smallButton"
@@ -716,12 +730,12 @@ class App extends React.Component {
           </tr>
           <tr>
             <td id="spot">A</td>
-            {this.game.m !== 2 ? (
+            {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[0]} />
               </td>
             ) : null}
-            {this.game.m === 1 ? (
+            {this.game.m == 1 ? (
               <td>
                 <input
                   className="ind"
@@ -734,12 +748,12 @@ class App extends React.Component {
           </tr>
           <tr>
             <td id="spot">B</td>
-            {this.game.m !== 2 ? (
+            {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[1]} />
               </td>
             ) : null}
-            {this.game.m === 1 ? (
+            {this.game.m == 1 ? (
               <td>
                 <input
                   className="ind"
@@ -752,12 +766,12 @@ class App extends React.Component {
           </tr>
           <tr>
             <td id="spot">C</td>
-            {this.game.m !== 2 ? (
+            {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[2]} />
               </td>
             ) : null}
-            {this.game.m === 1 ? (
+            {this.game.m == 1 ? (
               <td>
                 <input
                   className="ind"
@@ -770,12 +784,12 @@ class App extends React.Component {
           </tr>
           <tr>
             <td id="spot">D</td>
-            {this.game.m !== 2 ? (
+            {this.game.m != 2 ? (
               <td>
                 <input className="ind" type="button" value={this.game.ind[3]} />
               </td>
             ) : null}
-            {this.game.m === 1 ? (
+            {this.game.m == 1 ? (
               <td>
                 <input
                   className="ind"
@@ -789,7 +803,7 @@ class App extends React.Component {
           {this.game.n > 4 ? (
             <tr>
               <td id="spot">E</td>
-              {this.game.m !== 2 ? (
+              {this.game.m != 2 ? (
                 <td>
                   <input
                     className="ind"
@@ -798,7 +812,7 @@ class App extends React.Component {
                   />
                 </td>
               ) : null}
-              {this.game.m === 1 ? (
+              {this.game.m == 1 ? (
                 <td>
                   <input
                     className="ind"
@@ -813,7 +827,7 @@ class App extends React.Component {
           {this.game.n > 5 ? (
             <tr>
               <td id="spot">F</td>
-              {this.game.m !== 2 ? (
+              {this.game.m != 2 ? (
                 <td>
                   <input
                     className="ind"
@@ -822,7 +836,7 @@ class App extends React.Component {
                   />
                 </td>
               ) : null}
-              {this.game.m === 1 ? (
+              {this.game.m == 1 ? (
                 <td>
                   <input
                     className="ind"
@@ -834,7 +848,7 @@ class App extends React.Component {
               <td id={"color" + this.game.color}>{this.game.crypt[5]}</td>
             </tr>
           ) : null}
-          {this.game.m === 2 ? (
+          {this.game.m == 2 ? (
             <tr>
               <td colSpan="2">
                 <input
@@ -876,7 +890,7 @@ class App extends React.Component {
           ) : null}
           <tr>
             {this.state.page === idPage["P_INGAME"] ? (
-              <td colSpan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
+              <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
                   className="smallButton"
                   type="button"
@@ -885,7 +899,7 @@ class App extends React.Component {
                 />
               </td>
             ) : (
-              <td colSpan={this.game.m === 1 ? 4 : this.game.m === 2 ? 2 : 3}>
+              <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
                   className="smallButton"
                   type="button"

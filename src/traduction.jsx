@@ -13,8 +13,8 @@ var traduction = {
     EXTREME: "Extrême",
     NIGHTMARE: "Cauchemar",
     CLASSICSUB: "",
-    EXTREMESUB: "Voir la règle",
-    NIGHTMARESUB: "Voir la règle",
+    EXTREMESUB: "(Voir la règle)",
+    NIGHTMARESUB: "(Voir la règle)",
     EASY: "Facile",
     MEDIUM: "Moyen",
     HARD: "Difficile",
@@ -33,7 +33,9 @@ var traduction = {
     SEARCH: "# PARTIE",
     STEP1: "Mode",
     STEP2: "Difficulté",
-    STEP3: "Longueur"
+    STEP3: "Longueur",
+    CRITERIA: "Cartes Critères",
+    VERIFIER: "Cartes Vérification"
   },
   1: {
     LANG: "EN",
@@ -69,7 +71,9 @@ var traduction = {
     SEARCH: "# GAME",
     STEP1: "Mode",
     STEP2: "Difficulty",
-    STEP3: "Duration"
+    STEP3: "Duration",
+    CRITERIA: "Criteria Cards",
+    VERIFIER: "Verification Cards"
   }
 };
 
