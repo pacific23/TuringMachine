@@ -27,7 +27,7 @@ var traduction = {
     NO: "NON", // 24
     CODE: "CODE", // 25
     SHEET: "FEUILLE DE NOTES", // 26
-    SEARCH: "CHERCHER UNE PARTIE" // 27
+    SEARCH: "#PARTIE" // 27
   },
   1: {
     LANG: "EN", // 0
@@ -57,7 +57,7 @@ var traduction = {
     NO: "NO", // 24
     CODE: "CODE", // 25
     SHEET: "NOTE SHEET", // 26
-    SEARCH: "SEARCH GAME" // 27
+    SEARCH: "# GAME" // 27
   }
 };
 

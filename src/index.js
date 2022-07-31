@@ -1335,6 +1335,16 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
+              <form onSubmit={() => this.hashGame()}>
+                <input
+                  className="text"
+                  type="text"
+                  defaultValue=""
+                  placeholder={traduction[this.state.language]["SEARCH"]}
+                  size="10"
+                  onChange={(e) => this.handleChange(e.target.value)}
+                />
+              </form>
               {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"
