@@ -10,7 +10,6 @@ import idPage from "./idPage";
 
 import boxFR from "./images/BOX_FR.jpg";
 import boxEN from "./images/BOX_EN.jpg";
-import number from "./images/Number.png";
 import history from "./images/History.png";
 import home from "./images/Home.png";
 import langFR from "./images/LangFR.png";
@@ -135,7 +134,7 @@ class App extends React.Component {
       });
     } else {
       this.setState({
-        sizeImage: Math.min(sizex / 2, sizey - 75),
+        sizeImage: Math.min(sizex / 2, sizey - 100),
         sizeFont: Math.max(sizex * 0.03, 20),
         landscapeMode: sizex < sizey ? false : true
       });
