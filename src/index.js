@@ -1612,7 +1612,7 @@ class App extends React.Component {
     return (
       <table className="mainTab">
         <tbody>
-          <tr style={{ height: "30%" }}>
+          <tr style={{ height: "50%" }}>
             <td>
               {this.state.page !== idPage["P_MAIN"] ? (
                 <button
@@ -1655,7 +1655,7 @@ class App extends React.Component {
           <tr style={{ height: "40%" }}>
             <td>{this.getMainMenu()}</td>
           </tr>
-          <tr>
+          <tr style={{ height: "10%" }}>
             <td>{this.getOptionMenu()}</td>
           </tr>
         </tbody>
