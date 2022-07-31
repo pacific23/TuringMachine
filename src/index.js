@@ -141,14 +141,14 @@ class App extends React.Component {
     var sizey = window.innerHeight;
     if (sizex < sizey) {
       this.setState({
-        sizeImage: Math.min(sizex * 0.7, sizey / 2),
+        sizeImage: Math.min(sizex * 0.8, sizey / 2),
         sizeFont: Math.max(sizex * 0.06, 20),
         smallSizeFont: Math.max(sizex * 0.04, 14),
         landscapeMode: sizex < sizey ? false : true
       });
     } else {
       this.setState({
-        sizeImage: Math.min(sizex / 2, sizey - 150),
+        sizeImage: Math.min(sizex / 2, sizey - 130),
         sizeFont: Math.max(sizex * 0.03, 20),
         smallSizeFont: Math.max(sizex * 0.02, 14),
         landscapeMode: sizex < sizey ? false : true
