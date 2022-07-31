@@ -297,7 +297,7 @@ class App extends React.Component {
   }
 
   testCode() {
-    if (this.state.codeValue == this.game.code) {
+    if (this.state.codeValue === this.game.code) {
       this.changePage(idPage["P_SOLUTION"]);
       this.setState({ youWin: true });
     } else {
@@ -478,15 +478,14 @@ class App extends React.Component {
           <tr>
             <td>
               {this.state.wrongCode ? (
-                <span>{traduction[this.state.language]["FALSECODE"]}</span>
+                <div>{traduction[this.state.language]["FALSECODE"]}</div>
               ) : (
-                <span>&nbsp;</span>
+                <div>&nbsp;</div>
               )}
               <br />
               <br />
-              <form onSubmit={() => this.testCode()}>
+              <form>
                 <input
-                  autoFocus
                   className="code"
                   type="text"
                   defaultValue=""
@@ -498,7 +497,7 @@ class App extends React.Component {
                 <br />
                 <input
                   className="smallButton"
-                  type="button"
+                  type="submit"
                   value={traduction[this.state.language]["TESTCODE"]}
                   onClick={() => this.testCode()}
                 />
