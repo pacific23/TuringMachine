@@ -428,34 +428,6 @@ class App extends React.Component {
                   sizeFont={this.state.sizeFont}
                 />
               ) : null}
-              {this.state.page === idPage["P_SHARP"] ? (
-                <table className="mainTab">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <input
-                          autoFocus
-                          className="text"
-                          type="text"
-                          defaultValue="#"
-                          size="10"
-                          onChange={(e) => this.handleChange(e.target.value)}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input
-                          className="button"
-                          type="button"
-                          value={traduction[this.state.language]["LOAD"]}
-                          onClick={() => this.hashGame()}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              ) : null}
             </td>
           </tr>
         </tbody>
@@ -466,14 +438,6 @@ class App extends React.Component {
   getOptionMenu() {
     return (
       <div>
-        <button
-          className="smallButton"
-          type="submit"
-          onClick={() => this.changePage(idPage["P_SHARP"])}
-        >
-          <img src={number} width="20" alt="number" />
-        </button>
-        &nbsp;
         <input
           className="smallButton"
           type="button"
@@ -1318,6 +1282,24 @@ class App extends React.Component {
         <tbody>
           <tr>
             <td>
+              <input
+                autoFocus
+                className="text"
+                type="text"
+                defaultValue=""
+                placeholder={traduction[this.state.language]["SEARCH"]}
+                size="10"
+                onChange={(e) => this.handleChange(e.target.value)}
+              />{" "}
+              <br />
+              <input
+                className="smallButton"
+                type="button"
+                value={traduction[this.state.language]["LOAD"]}
+                onClick={() => this.hashGame()}
+              />
+              <br />
+              <br />
               {this.state.page !== idPage["P_MAIN"] ? (
                 <button
                   id="homeBut"

@@ -1,6 +1,5 @@
 var idPage = {
   P_MAIN: 0,
-  P_SHARP: 1,
   P_ADV: 2,
   P_LOADING: 3,
   P_INGAME: 4,
