@@ -241,8 +241,7 @@ class App extends React.Component {
         this.game.law = jsonResponse["law"];
         this.game.crypt = jsonResponse["crypt"];
         if (this.game.m > 0) {
-          this.state.soloPlay = false;
-          this.state.askSolo = false;
+          this.game.par = Math.ceil(this.game.par * 1.5);
         }
         if (this.game.m == 1) {
           this.shuffleIndFake();
@@ -279,6 +278,8 @@ class App extends React.Component {
       "GET",
       "https://www.pcspace.com/tl/recordSolo.php?i=" +
         this.game.idPartie +
+        "&m=" +
+        this.game.m +
         "&r=" +
         this.state.roundValue +
         "&q=" +
