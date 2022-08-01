@@ -269,6 +269,8 @@ class App extends React.Component {
   }
 
   setData(win) {
+    var solo = "0";
+    if (this.state.soloPlay) solo = "1";
     var xhr = new XMLHttpRequest();
 
     xhr.addEventListener("load", () => {
@@ -285,7 +287,9 @@ class App extends React.Component {
         "&q=" +
         this.state.questionValue +
         "&w=" +
-        win
+        win +
+        "&s=" +
+        solo
     );
     xhr.send();
   }
@@ -364,8 +368,10 @@ class App extends React.Component {
     if (this.state.codeValue == this.game.code) {
       this.changePage(idPage["P_SOLUTION"]);
       this.setState({ youWin: true });
+      this.setData(2);
     } else {
       this.setState({ wrongCode: true });
+      this.setData(1);
     }
   }
   testCodeSolo() {
@@ -389,6 +395,7 @@ class App extends React.Component {
       this.setData(win);
     } else {
       this.setState({ wrongCode: true });
+      this.setData(0);
     }
   }
 
