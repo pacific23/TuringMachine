@@ -395,7 +395,6 @@ class App extends React.Component {
       this.setData(win);
     } else {
       this.setState({ wrongCode: true });
-      this.setData(0);
     }
   }
 
