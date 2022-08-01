@@ -41,8 +41,8 @@ class App extends React.Component {
     language: 1,
     hashValue: "",
     codeValue: "",
-    roundValue: "",
-    questionValue: "",
+    roundValue: "0",
+    questionValue: "0",
     advancedSettings: [0, 0, 1, 1],
     actualClipboard: clipboard,
     wrongCode: false,
@@ -330,8 +330,8 @@ class App extends React.Component {
       actualClipboard: clipboard,
       hashValue: "",
       codeValue: "",
-      roundValue: "",
-      questionValue: "",
+      roundValue: "0",
+      questionValue: "0",
       wrongCode: false,
       youWin: false,
       winSolo: 0
@@ -371,7 +371,7 @@ class App extends React.Component {
       this.setData(2);
     } else {
       this.setState({ wrongCode: true });
-      this.setData(1);
+      this.setData(0);
     }
   }
   testCodeSolo() {
