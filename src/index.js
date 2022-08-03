@@ -727,14 +727,14 @@ class App extends React.Component {
     return (
       <div>
         <input
-          className="smallButton"
+          className="smallButtonHelp"
           type="button"
           value={traduction[this.state.language]["ABOUT"]}
           onClick={() => this.changePage(idPage["P_ABOUT"])}
         />
         &nbsp;
         <button
-          className="smallButton"
+          className="smallButtonHelp"
           type="submit"
           onClick={() => this.swapLanguage()}
         >
