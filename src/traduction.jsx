@@ -50,7 +50,8 @@ var traduction = {
     INPUTQUESTION: "NOMBRE DE QUESTIONS",
     WINSOLO0: "VOUS AVEZ TROUVE LE CODE MAIS PAS BATTU LA MACHINE",
     WINSOLO1: "VICTOIRE !!! MEME SCORE QUE LA MACHINE !!!",
-    WINSOLO2: "VICTOIRE !!! VOUS AVEZ BATTU MACHINE !!!"
+    WINSOLO2: "VICTOIRE !!! VOUS AVEZ BATTU MACHINE !!!",
+    ABOUTLINK: "http://www.scorpionmasque.com/fr/turingmachine"
   },
   1: {
     LANG: "EN",
@@ -103,7 +104,8 @@ var traduction = {
     INPUTQUESTION: "TOTAL OF QUESTIONS",
     WINSOLO0: "YOU FIND THE CODE BUT DON'T BEAT THE MACHINE",
     WINSOLO1: "VICTORY!!! YOU TIED THE MACHINE!!!",
-    WINSOLO2: "VICTORY!!! YOU BEAT THE MACHINE!!!"
+    WINSOLO2: "VICTORY!!! YOU BEAT THE MACHINE!!!",
+    ABOUTLINK: "http://www.scorpionmasque.com/en/turingmachine"
   }
 };
 

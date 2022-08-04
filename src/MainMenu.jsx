@@ -47,7 +47,7 @@ class MainMenu extends Component {
                 type="button"
                 onClick={() =>
                   window.open(
-                    "https://www.pcspace.com/SheetTM.pdf",
+                    "https://randolphca.sharepoint.com/:b:/s/Scorpion/EQVT739hm1VLlPpFw_IfeTsBpsugZ1JLWLvwTqkn5SR5JA?e=PnrGIf",
                     "_blank",
                     "noopener,noreferrer"
                   )

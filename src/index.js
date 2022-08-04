@@ -730,7 +730,13 @@ class App extends React.Component {
           className="smallButtonHelp"
           type="button"
           value={traduction[this.state.language]["ABOUT"]}
-          onClick={() => this.changePage(idPage["P_ABOUT"])}
+          onClick={() =>
+            window.open(
+              traduction[this.state.language]["ABOUTLINK"],
+              "_blank",
+              "noopener,noreferrer"
+            )
+          }
         />
         &nbsp;
         <button
