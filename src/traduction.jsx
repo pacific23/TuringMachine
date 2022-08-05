@@ -80,7 +80,7 @@ var traduction = {
     CHECKCODE: "TEST A CODE",
     INPUTCODE: "INPUT THE CODE",
     TESTCODE: "VERIFICATION",
-    FALSECODE: "IT'S NOT THE CODE!!!",
+    FALSECODE: "This code is not correct",
     YOUWIN: "VICTORY!!!",
     CANCEL: "BACK",
     SOLUTION: "SOLUTION",
