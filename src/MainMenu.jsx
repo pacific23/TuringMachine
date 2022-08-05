@@ -2,6 +2,8 @@ import { Component } from "react";
 import traduction from "./traduction";
 import idPage from "./idPage";
 
+import print from "./images/PrintLogo.png";
+
 class MainMenu extends Component {
   render() {
     return (
@@ -36,7 +38,9 @@ class MainMenu extends Component {
                 type="button"
                 value={traduction[this.props.language]["CUSTOM"]}
                 onClick={() => this.props.changePage(idPage["P_ADV"])}
-                style={{ fontSize: this.props.sizeFont }}
+                style={{
+                  fontSize: this.props.sizeFont
+                }}
               />
             </td>
           </tr>
@@ -54,7 +58,24 @@ class MainMenu extends Component {
                 }
                 style={{ fontSize: this.props.sizeFont }}
               >
-                {traduction[this.props.language]["SHEET"]}
+                <img
+                  style={{ verticalAlign: "middle" }}
+                  alt="notesheet"
+                  src={print}
+                  width="auto"
+                  height="25"
+                />
+                <span style={{ verticalAlign: "middle" }}>
+                  &nbsp;
+                  {traduction[this.props.language]["SHEET"]}&nbsp;
+                </span>
+                <img
+                  style={{ verticalAlign: "middle" }}
+                  alt="notesheet"
+                  src={print}
+                  width="auto"
+                  height="25"
+                />
               </button>
             </td>
           </tr>

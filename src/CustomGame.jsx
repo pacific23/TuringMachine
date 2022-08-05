@@ -67,19 +67,33 @@ class CustomGame extends Component {
               )}
             </td>
           </tr>
-          <tr>
-            <td></td>
-            <td>
-              <input
-                className="advButton"
-                type="button"
-                value={traduction[this.props.language]["PLAY"]}
-                onClick={() => this.props.playAdvanced()}
-                style={{ fontSize: this.props.smallSizeFont }}
-              />
-            </td>
-            <td></td>
-          </tr>
+          {this.props.landscapeMode ? (
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  className="advButton"
+                  type="button"
+                  value={traduction[this.props.language]["PLAY"]}
+                  onClick={() => this.props.playAdvanced()}
+                  style={{ fontSize: this.props.smallSizeFont }}
+                />
+              </td>
+              <td></td>
+            </tr>
+          ) : (
+            <tr>
+              <td colspan="3">
+                <input
+                  className="advButton"
+                  type="button"
+                  value={traduction[this.props.language]["PLAY"]}
+                  onClick={() => this.props.playAdvanced()}
+                  style={{ fontSize: this.props.smallSizeFont }}
+                />
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     );
@@ -88,62 +102,110 @@ class CustomGame extends Component {
   getAdvancedTab(categ) {
     return (
       <table className="mainTab">
-        <thead>
-          <tr>
-            {categ === 1 ? (
-              <td id="bcolor1">
-                <span style={{ fontSize: this.props.smallSizeFont }}>
-                  {traduction[this.props.language]["STEP1"]}
-                </span>
-              </td>
-            ) : (
-              <td></td>
-            )}
-            {categ === 2 ? (
-              <td id="bcolor2">
-                <div id="bcolor2">
-                  <span style={{ fontSize: this.props.smallSizeFont }}>
+        {this.props.landscapeMode ? (
+          <thead>
+            <tr>
+              {categ === 1 ? (
+                <td>
+                  <span
+                    style={{
+                      fontSize: this.props.smallSizeFont,
+                      color: "#8067ad"
+                    }}
+                  >
+                    {traduction[this.props.language]["STEP1"]}
+                  </span>
+                </td>
+              ) : null}
+              {categ === 2 ? (
+                <td>
+                  <span
+                    style={{
+                      fontSize: this.props.smallSizeFont,
+                      color: "#8067ad"
+                    }}
+                  >
                     {traduction[this.props.language]["STEP2"]}
                   </span>
-                </div>
-              </td>
-            ) : (
-              <td></td>
-            )}
-            {categ === 3 ? (
-              <td id="bcolor3">
-                <div id="bcolor3">
-                  <span style={{ fontSize: this.props.smallSizeFont }}>
+                </td>
+              ) : null}
+              {categ === 3 ? (
+                <td>
+                  <span
+                    style={{
+                      fontSize: this.props.smallSizeFont,
+                      color: "#8067ad"
+                    }}
+                  >
                     {traduction[this.props.language]["STEP3"]}
                   </span>
-                </div>
-              </td>
-            ) : (
-              <td></td>
-            )}
-          </tr>
-        </thead>
+                </td>
+              ) : null}
+            </tr>
+          </thead>
+        ) : (
+          <thead>
+            <tr>
+              {categ === 1 ? (
+                <td colspan="3">
+                  <span
+                    style={{
+                      fontSize: this.props.smallSizeFont,
+                      color: "#8067ad"
+                    }}
+                  >
+                    {traduction[this.props.language]["STEP1"]}
+                  </span>
+                </td>
+              ) : null}
+              {categ === 2 ? (
+                <td colspan="3">
+                  <span
+                    style={{
+                      fontSize: this.props.smallSizeFont,
+                      color: "#8067ad"
+                    }}
+                  >
+                    {traduction[this.props.language]["STEP2"]}
+                  </span>
+                </td>
+              ) : null}
+              {categ === 3 ? (
+                <td colspan="3">
+                  <span
+                    style={{
+                      fontSize: this.props.smallSizeFont,
+                      color: "#8067ad"
+                    }}
+                  >
+                    {traduction[this.props.language]["STEP3"]}
+                  </span>
+                </td>
+              ) : null}
+            </tr>
+          </thead>
+        )}
         {this.props.landscapeMode ? (
           <tbody>
             <tr>
-              <td colSpan="3" id={"bcolor" + categ}>
+              <td>
                 {this.getAdvancedButton(categ, 0, this.buttonNames[categ][0])}
               </td>
             </tr>
             <tr>
-              <td colSpan="3" id={"bcolor" + categ}>
+              <td>
                 {this.getAdvancedButton(categ, 1, this.buttonNames[categ][1])}
               </td>
             </tr>
             <tr>
-              <td colSpan="3" id={"bcolor" + categ}>
+              <td>
                 {this.getAdvancedButton(categ, 2, this.buttonNames[categ][2])}
               </td>
             </tr>
           </tbody>
         ) : (
           <tbody>
-            <tr id={"bcolor" + categ}>
+            <tr>
               <td>
                 {this.getAdvancedButton(categ, 0, this.buttonNames[categ][0])}
               </td>

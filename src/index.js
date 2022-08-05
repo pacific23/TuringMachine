@@ -11,6 +11,7 @@ import idPage from "./idPage";
 
 import boxFR from "./images/BOX_FR.jpg";
 import boxEN from "./images/BOX_EN.jpg";
+import logoTM from "./images/Menu.png";
 import history from "./images/History.png";
 import home from "./images/Home.png";
 import langFR from "./images/LangFR.png";
@@ -577,7 +578,7 @@ class App extends React.Component {
           <tr>
             <td>
               <input
-                className="button"
+                className="buttonMain"
                 type="button"
                 value={traduction[this.state.language]["COMPETITIVE"]}
                 onClick={() => this.goCompetitive()}
@@ -587,7 +588,7 @@ class App extends React.Component {
           <tr>
             <td>
               <input
-                className="button"
+                className="buttonMain"
                 type="button"
                 value={traduction[this.state.language]["SOLO"]}
                 onClick={() => this.goSolo()}
@@ -640,14 +641,14 @@ class App extends React.Component {
               />
               <br />
               <input
-                className="smallButton"
+                className="smallButtonMain"
                 type="button"
                 value={traduction[this.state.language]["TESTCODE"]}
                 onClick={() => this.testCodeSolo()}
               />
               &nbsp;
               <input
-                className="smallButton"
+                className="smallButtonMain"
                 type="button"
                 value={traduction[this.state.language]["CANCEL"]}
                 onClick={() => this.changePage(idPage["P_INGAME"])}
@@ -682,14 +683,14 @@ class App extends React.Component {
               />
               <br />
               <input
-                className="smallButton"
+                className="smallButtonMain"
                 type="button"
                 value={traduction[this.state.language]["TESTCODE"]}
                 onClick={() => this.testCode()}
               />
               &nbsp;
               <input
-                className="smallButton"
+                className="smallButtonMain"
                 type="button"
                 value={traduction[this.state.language]["CANCEL"]}
                 onClick={() => this.changePage(idPage["P_INGAME"])}
@@ -1009,14 +1010,14 @@ class App extends React.Component {
               <td colSpan={this.game.n}>
                 {this.state.soloPlay ? (
                   <input
-                    className="smallButton"
+                    className="smallButtonMain"
                     type="button"
                     value={traduction[this.state.language]["CHECKCODESOLO"]}
                     onClick={() => this.changePage(idPage["P_TESTCODESOLO"])}
                   />
                 ) : (
                   <input
-                    className="smallButton"
+                    className="smallButtonMain"
                     type="button"
                     value={traduction[this.state.language]["CHECKCODE"]}
                     onClick={() => this.changePage(idPage["P_TESTCODE"])}
@@ -1024,7 +1025,7 @@ class App extends React.Component {
                 )}
                 &nbsp;&nbsp;
                 <input
-                  className="smallButton"
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["SOLUTION"]}
                   onClick={() => this.changePage(idPage["P_SHOWQUESTION"])}
@@ -1036,7 +1037,13 @@ class App extends React.Component {
             <tr>
               <td colSpan={this.game.n}>
                 <input
-                  className="smallButton"
+                  className="smallButtonHelp"
+                  type="button"
+                  value={traduction[this.state.language]["SHOW_SOLUTION"]}
+                />
+                &nbsp;
+                <input
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["NO"]}
                   onClick={() => {
@@ -1045,13 +1052,7 @@ class App extends React.Component {
                 />
                 &nbsp;
                 <input
-                  className="smallButton"
-                  type="button"
-                  value={traduction[this.state.language]["SHOW_SOLUTION"]}
-                />
-                &nbsp;
-                <input
-                  className="smallButton"
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["YES"]}
                   onClick={() => {
@@ -1315,7 +1316,7 @@ class App extends React.Component {
             <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
-                  className="smallButton"
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["CHECKCODE"]}
                   onClick={() => this.changePage(idPage["P_TESTCODE"])}
@@ -1327,7 +1328,7 @@ class App extends React.Component {
             <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
-                  className="smallButton"
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["CHECKCODESOLO"]}
                   onClick={() => this.changePage(idPage["P_TESTCODESOLO"])}
@@ -1339,7 +1340,7 @@ class App extends React.Component {
             <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
-                  className="smallButton"
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["SOLUTION"]}
                   onClick={() => this.changePage(idPage["P_SHOWQUESTION"])}
@@ -1351,7 +1352,7 @@ class App extends React.Component {
             <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
-                  className="smallButton"
+                  className="smallButtonHelp"
                   type="button"
                   value={traduction[this.state.language]["SHOW_SOLUTION"]}
                 />
@@ -1362,7 +1363,7 @@ class App extends React.Component {
             <tr>
               <td colSpan={this.game.m == 1 ? 4 : this.game.m == 2 ? 2 : 3}>
                 <input
-                  className="smallButton"
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["NO"]}
                   onClick={() => {
@@ -1371,7 +1372,7 @@ class App extends React.Component {
                 />
                 &nbsp;
                 <input
-                  className="smallButton"
+                  className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["YES"]}
                   onClick={() => {
@@ -1870,24 +1871,48 @@ class App extends React.Component {
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
-              <form onSubmit={() => this.hashGame()}>
-                <input
-                  className="text"
-                  type="text"
-                  defaultValue=""
-                  placeholder={traduction[this.state.language]["SEARCH"]}
-                  size="10"
-                  onChange={(e) => this.handleChange(e.target.value)}
-                />
-              </form>
-              <img
-                src={imgBox[this.state.language]}
-                width={this.state.sizeImage}
-                height="auto"
-                alt="tm"
-              />
-              <br />
-              {this.getOptionMenu()}
+              <table
+                className="mainTabBox"
+                style={{
+                  backgroundImage: `url(${imgBox[this.state.language]})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center"
+                }}
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <form onSubmit={() => this.hashGame()}>
+                        <img
+                          style={{ verticalAlign: "middle" }}
+                          alt="logoTM"
+                          src={logoTM}
+                          width="auto"
+                          height="25"
+                        />
+                        &nbsp;
+                        <input
+                          className="text"
+                          type="text"
+                          defaultValue=""
+                          placeholder={
+                            traduction[this.state.language]["SEARCH"]
+                          }
+                          size="15"
+                          onChange={(e) => this.handleChange(e.target.value)}
+                        />
+                      </form>
+                    </td>
+                  </tr>
+                  <tr height="70%">
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>{this.getOptionMenu()}</td>
+                  </tr>
+                </tbody>
+              </table>
             </td>
             <td>{this.getMainMenu()}</td>
           </tr>
@@ -1922,22 +1947,45 @@ class App extends React.Component {
                   <img src={history} width="20" alt="history" />
                 </button>
               ) : null}
-              <form onSubmit={() => this.hashGame()}>
-                <input
-                  className="text"
-                  type="text"
-                  defaultValue=""
-                  placeholder={traduction[this.state.language]["SEARCH"]}
-                  size="10"
-                  onChange={(e) => this.handleChange(e.target.value)}
-                />
-              </form>
-              <img
-                src={imgBox[this.state.language]}
-                width={this.state.sizeImage}
-                height="auto"
-                alt="tm"
-              />
+              <table
+                className="mainTabBox"
+                style={{
+                  backgroundImage: `url(${imgBox[this.state.language]})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center"
+                }}
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <form onSubmit={() => this.hashGame()}>
+                        <img
+                          style={{ verticalAlign: "middle" }}
+                          alt="logoTM"
+                          src={logoTM}
+                          width="auto"
+                          height="25"
+                        />
+                        &nbsp;
+                        <input
+                          className="text"
+                          type="text"
+                          defaultValue=""
+                          placeholder={
+                            traduction[this.state.language]["SEARCH"]
+                          }
+                          size="15"
+                          onChange={(e) => this.handleChange(e.target.value)}
+                        />
+                      </form>
+                    </td>
+                  </tr>
+                  <tr style={{ height: "80%" }}>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
             </td>
           </tr>
           <tr style={{ height: "40%" }}>
