@@ -618,7 +618,7 @@ class App extends React.Component {
                 type="text"
                 defaultValue=""
                 placeholder={traduction[this.state.language]["INPUTCODE"]}
-                size="15"
+                size="20"
                 onChange={(e) => this.handleChangeCode(e.target.value)}
               />
               <br />
@@ -627,7 +627,7 @@ class App extends React.Component {
                 type="text"
                 defaultValue=""
                 placeholder={traduction[this.state.language]["INPUTROUND"]}
-                size="15"
+                size="20"
                 onChange={(e) => this.handleChangeRound(e.target.value)}
               />
               <br />
@@ -636,7 +636,7 @@ class App extends React.Component {
                 type="text"
                 defaultValue=""
                 placeholder={traduction[this.state.language]["INPUTQUESTION"]}
-                size="15"
+                size="20"
                 onChange={(e) => this.handleChangeQuestion(e.target.value)}
               />
               <br />

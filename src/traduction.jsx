@@ -78,7 +78,7 @@ var traduction = {
     PLAY: "GENERATE",
     LOADING: "LOADING...",
     CHECKCODE: "TEST A CODE",
-    INPUTCODE: "TEST A CODE",
+    INPUTCODE: "INPUT YOUR CODE",
     TESTCODE: "VERIFICATION",
     FALSECODE: "This code is not correct",
     YOUWIN: "VICTORY!!!",
