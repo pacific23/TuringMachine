@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import Cookies from "universal-cookie";
+import Moment from "moment";
 import "./styles.css";
 
 import MainMenu from "./MainMenu";
@@ -50,7 +51,8 @@ class App extends React.Component {
     youWin: false,
     winSolo: 0,
     soloPlay: false,
-    askSolo: false
+    askSolo: false,
+    dailyText: ""
   };
   game = {
     idPartie: 0,
@@ -250,6 +252,12 @@ class App extends React.Component {
         if (this.game.m == 2) {
           this.sortInd();
         }
+        if (this.state.dailyText != "") {
+          Moment.locale("en");
+          this.state.dailyText = Moment.unix(jsonResponse["curDate"]).format(
+            traduction[this.state.language]["DATEFORMAT"]
+          );
+        }
         if (this.state.askSolo) this.changePage(idPage["P_ASKSOLO"]);
         else this.changePage(idPage["P_INGAME"]);
       } else {
@@ -305,7 +313,12 @@ class App extends React.Component {
   }
 
   gameOfTheDay() {
-    this.loadGame("s=1");
+    this.state.askSolo = true;
+    let time =
+      Math.floor(new Date().getTime() / 1000.0) -
+      new Date().getTimezoneOffset() * 60;
+    this.state.dailyText = "_";
+    this.loadGame("s=1&curDate=" + time);
   }
 
   hashGame() {
@@ -341,6 +354,7 @@ class App extends React.Component {
       this.state.advancedSettings = [0, 0, 1, 1];
       this.state.soloPlay = false;
       this.state.askSolo = false;
+      this.state.dailyText = "";
     }
   }
 
@@ -765,6 +779,9 @@ class App extends React.Component {
               >
                 <img src={home} width="20" height="auto" alt="home" />
               </button>
+              {this.state.dailyText != "" ? (
+                <span>{this.state.dailyText}&nbsp;</span>
+              ) : null}
               {"#" + this.game.hash}
               <img
                 src={this.state.actualClipboard}
@@ -1081,6 +1098,10 @@ class App extends React.Component {
               >
                 <img src={home} width="20" alt="home" />
               </button>
+              {this.state.dailyText != "" ? (
+                <span>{this.state.dailyText}&nbsp;</span>
+              ) : null}
+              {this.state.dailyText != "" ? <br /> : null}
               {"#" + this.game.hash}
               <img
                 src={this.state.actualClipboard}
