@@ -1414,10 +1414,14 @@ class App extends React.Component {
             <td colSpan={this.game.n}>
               <span class="emoji">&#128126;</span>TURING MACHINE
               <span class="emoji">&#128126;</span>
-              <br />
-              DAILY CHALLENGE
-              <br />
-              {this.state.dailyText}
+              {this.state.dailyText !== "" ? (
+                <span>
+                  <br />
+                  DAILY CHALLENGE
+                  <br />
+                  {this.state.dailyText}
+                </span>
+              ) : null}
             </td>
           </tr>
           {this.state.finalTab.map((round, idRound) => (
