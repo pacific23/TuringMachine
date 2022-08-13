@@ -6,6 +6,7 @@ import "./styles.css";
 
 import MainMenu from "./MainMenu";
 import CustomGame from "./CustomGame";
+import SoloPage from "./SoloPage";
 
 import traduction from "./traduction";
 import idPage from "./idPage";
@@ -23,6 +24,11 @@ import symb2 from "./images/Symb2.png";
 import symb3 from "./images/Symb3.png";
 import clipboard from "./images/Clipboard.png";
 import clipboardOK from "./images/ClipboardOK.png";
+import noteBox from "./images/NoteBox.jpg";
+import noteBoxYES from "./images/NoteBoxYES.jpg";
+import noteBoxNO from "./images/NoteBoxNO.jpg";
+import shareImg from "./images/Share.jpg";
+import shareImgOK from "./images/ShareOK.jpg";
 
 const imgLang = [langFR, langEN];
 const imgBox = [boxFR, boxEN];
@@ -52,8 +58,12 @@ class App extends React.Component {
     winSolo: 0,
     soloPlay: false,
     askSolo: false,
-    dailyText: ""
+    dailyText: "",
+    socialTXT: "",
+    finalTab: [],
+    actualCopySocialImg: shareImg
   };
+
   game = {
     idPartie: 0,
     color: 0,
@@ -172,6 +182,16 @@ class App extends React.Component {
     document.execCommand("copy");
     document.body.removeChild(el);
     this.setState({ actualClipboard: clipboardOK });
+  }
+
+  copySocialTXTToClipboard() {
+    const el = document.createElement("textarea");
+    el.value = this.state.socialTXT;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    this.setState({ actualCopySocialImg: shareImgOK });
   }
 
   addGame(hash) {
@@ -348,13 +368,16 @@ class App extends React.Component {
       questionValue: "0",
       wrongCode: false,
       youWin: false,
-      winSolo: 0
+      winSolo: 0,
+      actualCopySocialImg: shareImg
     });
     if (newPage === 0) {
       this.state.advancedSettings = [0, 0, 1, 1];
       this.state.soloPlay = false;
       this.state.askSolo = false;
       this.state.dailyText = "";
+      this.state.socialTXT = "";
+      this.state.finalTab = [];
     }
   }
 
@@ -369,16 +392,6 @@ class App extends React.Component {
     this.setState({ codeValue: value });
   }
 
-  handleChangeRound(value) {
-    value = value.replace(" ", "");
-    this.setState({ roundValue: value });
-  }
-
-  handleChangeQuestion(value) {
-    value = value.replace(" ", "");
-    this.setState({ questionValue: value });
-  }
-
   testCode() {
     if (this.state.codeValue == this.game.code) {
       this.changePage(idPage["P_SOLUTION"]);
@@ -389,25 +402,44 @@ class App extends React.Component {
       this.setData(0);
     }
   }
-  testCodeSolo() {
-    if (this.state.codeValue == this.game.code) {
-      var roundMachine = Math.ceil(this.game.par / 3);
-      var win = 0; // 0 : défaite, 1 : tie, 2 : victory
-      if (this.state.roundValue < roundMachine) {
-        win = 2;
-      } else {
-        if (this.state.roundValue == roundMachine) {
-          if (this.state.questionValue < this.game.par) {
-            win = 2;
-          }
-          if (this.state.questionValue == this.game.par) {
-            win = 1;
-          }
+
+  testCodeSoloVictory(nbRounds, nbQuestions, socialTXT, finalTab) {
+    this.state.roundValue = nbRounds;
+    this.state.questionValue = nbQuestions;
+    this.state.socialTXT = socialTXT;
+    this.state.finalTab = finalTab;
+    var roundMachine = Math.ceil(this.game.par / 3);
+    var win = 0; // 0 : défaite, 1 : tie, 2 : victory
+    if (this.state.roundValue < roundMachine) {
+      win = 2;
+      this.state.socialTXT =
+        this.state.socialTXT + traduction[this.state.language]["SOCIALWIN"];
+    } else {
+      if (this.state.roundValue == roundMachine) {
+        if (this.state.questionValue < this.game.par) {
+          win = 2;
+          this.state.socialTXT =
+            this.state.socialTXT + traduction[this.state.language]["SOCIALWIN"];
+        }
+        if (this.state.questionValue == this.game.par) {
+          win = 1;
+          this.state.socialTXT =
+            this.state.socialTXT + traduction[this.state.language]["SOCIALWIN"];
         }
       }
-      this.changePage(idPage["P_SOLUTION"]);
-      this.setState({ youWin: true, winSolo: win });
-      this.setData(win);
+    }
+    if (win === 0) {
+      this.state.socialTXT =
+        this.state.socialTXT + traduction[this.state.language]["SOCIALLOSE"];
+    }
+    this.changePage(idPage["P_SOLUTION"]);
+    this.setState({ youWin: true, winSolo: win });
+    this.setData(win);
+  }
+
+  testCodeSolo() {
+    if (this.state.codeValue == this.game.code) {
+      this.changePage(idPage["P_ASKSOLOPAGE2"]);
     } else {
       this.setState({ wrongCode: true });
     }
@@ -478,8 +510,34 @@ class App extends React.Component {
     if (this.state.page === idPage["P_TESTCODE"]) {
       return <div className="App">{this.getInputCodePage()}</div>;
     }
-    if (this.state.page === idPage["P_TESTCODESOLO"]) {
-      return <div className="App">{this.getInputSoloCodePage()}</div>;
+    if (
+      this.state.page === idPage["P_ASKSOLOPAGE1"] ||
+      this.state.page === idPage["P_ASKSOLOPAGE2"]
+    ) {
+      return (
+        <div className="App">
+          <SoloPage
+            page={this.state.page}
+            language={this.state.language}
+            game={this.game}
+            codeValue={this.state.codeValue}
+            roundValue={this.state.roundValue}
+            questionValue={this.state.questionValue}
+            wrongCode={this.state.wrongCode}
+            handleChangeCode={(e) => this.handleChangeCode(e)}
+            testCodeSolo={() => this.testCodeSolo()}
+            testCodeSoloVictory={(nbRounds, nbQuestions, socialTXT, finalTab) =>
+              this.testCodeSoloVictory(
+                nbRounds,
+                nbQuestions,
+                socialTXT,
+                finalTab
+              )
+            }
+            changePage={(e) => this.changePage(e)}
+          />
+        </div>
+      );
     }
     if (this.state.page === idPage["P_ERROR"]) {
       return (
@@ -606,66 +664,6 @@ class App extends React.Component {
                 type="button"
                 value={traduction[this.state.language]["SOLO"]}
                 onClick={() => this.goSolo()}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
-  }
-
-  getInputSoloCodePage() {
-    return (
-      <table className="mainTab">
-        <tbody>
-          <tr>
-            <td>
-              {this.state.wrongCode ? (
-                <span>{traduction[this.state.language]["FALSECODE"]}</span>
-              ) : (
-                <span>&nbsp;</span>
-              )}
-              <br />
-              <input
-                autoFocus
-                className="code"
-                type="text"
-                defaultValue=""
-                placeholder={traduction[this.state.language]["INPUTCODE"]}
-                size="20"
-                onChange={(e) => this.handleChangeCode(e.target.value)}
-              />
-              <br />
-              <input
-                className="code"
-                type="text"
-                defaultValue=""
-                placeholder={traduction[this.state.language]["INPUTROUND"]}
-                size="20"
-                onChange={(e) => this.handleChangeRound(e.target.value)}
-              />
-              <br />
-              <input
-                className="code"
-                type="text"
-                defaultValue=""
-                placeholder={traduction[this.state.language]["INPUTQUESTION"]}
-                size="20"
-                onChange={(e) => this.handleChangeQuestion(e.target.value)}
-              />
-              <br />
-              <input
-                className="smallButtonMain"
-                type="button"
-                value={traduction[this.state.language]["TESTCODE"]}
-                onClick={() => this.testCodeSolo()}
-              />
-              &nbsp;
-              <input
-                className="smallButtonMain"
-                type="button"
-                value={traduction[this.state.language]["CANCEL"]}
-                onClick={() => this.changePage(idPage["P_INGAME"])}
               />
             </td>
           </tr>
@@ -1030,7 +1028,7 @@ class App extends React.Component {
                     className="smallButtonMain"
                     type="button"
                     value={traduction[this.state.language]["CHECKCODESOLO"]}
-                    onClick={() => this.changePage(idPage["P_TESTCODESOLO"])}
+                    onClick={() => this.changePage(idPage["P_ASKSOLOPAGE1"])}
                   />
                 ) : (
                   <input
@@ -1352,7 +1350,7 @@ class App extends React.Component {
                   className="smallButtonMain"
                   type="button"
                   value={traduction[this.state.language]["CHECKCODESOLO"]}
-                  onClick={() => this.changePage(idPage["P_TESTCODESOLO"])}
+                  onClick={() => this.changePage(idPage["P_ASKSOLOPAGE1"])}
                 />
               </td>
             </tr>
@@ -1408,6 +1406,60 @@ class App extends React.Component {
     );
   }
 
+  displaySocialShare() {
+    return (
+      <table style={{ marginLeft: "auto", marginRight: "auto" }}>
+        <tbody>
+          <tr>
+            <td colSpan={this.game.n}>
+              <span class="emoji">&#128126;</span>TURING MACHINE
+              <span class="emoji">&#128126;</span>
+              <br />
+              DAILY CHALLENGE
+              <br />
+              {this.state.dailyText}
+            </td>
+          </tr>
+          {this.state.finalTab.map((round, idRound) => (
+            <tr>
+              {round.map((question, idQuestion) => (
+                <td>
+                  {question === 0 ? <img src={noteBox} alt="empty" /> : null}
+                  {question === 1 ? <img src={noteBoxYES} alt="yes" /> : null}
+                  {question === 2 ? <img src={noteBoxNO} alt="no" /> : null}
+                </td>
+              ))}
+            </tr>
+          ))}
+          <tr>
+            <td colSpan={this.game.n}>
+              {this.state.winSolo === 0
+                ? traduction[this.state.language]["SOCIALLOSE"]
+                : null}
+              {this.state.winSolo === 1
+                ? traduction[this.state.language]["SOCIALWIN"]
+                : null}
+              {this.state.winSolo === 2
+                ? traduction[this.state.language]["SOCIALWIN"]
+                : null}
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={this.game.n}>
+              <img
+                src={this.state.actualCopySocialImg}
+                width="50"
+                height="auto"
+                alt="copy"
+                onClick={() => this.copySocialTXTToClipboard()}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
+
   getLandscapeSolution() {
     return (
       <table className="mainTab">
@@ -1437,6 +1489,11 @@ class App extends React.Component {
               <td colSpan={this.game.n}>
                 {traduction[this.state.language]["YOUWIN"]}
               </td>
+            </tr>
+          ) : null}
+          {this.state.youWin && this.state.soloPlay ? (
+            <tr>
+              <td colSpan={this.game.n}>{this.displaySocialShare()}</td>
             </tr>
           ) : null}
           {this.state.youWin &&
@@ -1613,6 +1670,11 @@ class App extends React.Component {
           {this.state.youWin && !this.state.soloPlay ? (
             <tr>
               <td colSpan="3">{traduction[this.state.language]["YOUWIN"]}</td>
+            </tr>
+          ) : null}
+          {this.state.youWin && this.state.soloPlay ? (
+            <tr>
+              <td colSpan={this.game.n}>{this.displaySocialShare()}</td>
             </tr>
           ) : null}
           {this.state.youWin &&
