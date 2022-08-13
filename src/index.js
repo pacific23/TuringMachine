@@ -535,6 +535,7 @@ class App extends React.Component {
               )
             }
             changePage={(e) => this.changePage(e)}
+            dailyText={this.state.dailyText}
           />
         </div>
       );
