@@ -88,7 +88,10 @@ class SoloPage extends Component {
 
   submit() {
     let finalTab = [];
-    let socialTXT = "🤖TURING MACHINE🤖\n\rDAILY CHALLENGE\n\r";
+    let socialTXT =
+      "🤖TURING MACHINE🤖\n\rDAILY CHALLENGE\n\r#" +
+      this.props.game.hash +
+      "\n\r";
     let nbRounds = 0;
     let nbQuestions = 0;
     for (var r = 0; r < this.state.questionsTab.length; r++) {

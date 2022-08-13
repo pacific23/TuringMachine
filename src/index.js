@@ -1422,6 +1422,8 @@ class App extends React.Component {
                   {this.state.dailyText}
                 </span>
               ) : null}
+              <br />
+              {"#" + this.game.hash}
             </td>
           </tr>
           {this.state.finalTab.map((round, idRound) => (
