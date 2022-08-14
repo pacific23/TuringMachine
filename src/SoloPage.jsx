@@ -112,7 +112,7 @@ class SoloPage extends Component {
           nbQuestionsThisRound++;
         }
         if (this.state.questionsTab[r][q] === 2) {
-          socialTXT = socialTXT + "❎";
+          socialTXT = socialTXT + "❌";
           nbQuestionsThisRound++;
         }
       }
