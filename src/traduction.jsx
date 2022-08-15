@@ -91,7 +91,7 @@ var traduction = {
     LOADING: "LOADING...",
     CHECKCODE: "TEST A CODE",
     INPUTCODE: "INPUT YOUR CODE",
-    TESTCODE: "VERIFICATION",
+    TESTCODE: "VERIFY",
     FALSECODE: "This code is not correct",
     GOODCODE: "This is the correct code!!!",
     INPUTSOLOA: "Now, to know if you beat the machine,",
