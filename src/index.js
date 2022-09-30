@@ -1561,7 +1561,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[0] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1574,7 +1576,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[1] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1587,7 +1591,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[2] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1600,7 +1606,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[3] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1614,7 +1622,9 @@ class App extends React.Component {
                     backgroundImage:
                       "url('https://www.pcspace.com/tl/img/laws/" +
                       this.game.law[4] +
-                      "_Mini.jpg')"
+                      "_Mini_" +
+                      traduction[this.state.language]["LANG"] +
+                      ".jpg')"
                   }}
                 ></button>
               </td>
@@ -1629,7 +1639,9 @@ class App extends React.Component {
                     backgroundImage:
                       "url('https://www.pcspace.com/tl/img/laws/" +
                       this.game.law[5] +
-                      "_Mini.jpg')"
+                      "_Mini_" +
+                      traduction[this.state.language]["LANG"] +
+                      ".jpg')"
                   }}
                 ></button>
               </td>
@@ -1729,7 +1741,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[0] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1745,7 +1759,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[1] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1761,7 +1777,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[2] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1777,7 +1795,9 @@ class App extends React.Component {
                   backgroundImage:
                     "url('https://www.pcspace.com/tl/img/laws/" +
                     this.game.law[3] +
-                    "_Mini.jpg')"
+                    "_Mini_" +
+                    traduction[this.state.language]["LANG"] +
+                    ".jpg')"
                 }}
               ></button>
             </td>
@@ -1794,7 +1814,9 @@ class App extends React.Component {
                     backgroundImage:
                       "url('https://www.pcspace.com/tl/img/laws/" +
                       this.game.law[4] +
-                      "_Mini.jpg')"
+                      "_Mini_" +
+                      traduction[this.state.language]["LANG"] +
+                      ".jpg')"
                   }}
                 ></button>
               </td>
@@ -1812,7 +1834,9 @@ class App extends React.Component {
                     backgroundImage:
                       "url('https://www.pcspace.com/tl/img/laws/" +
                       this.game.law[5] +
-                      "_Mini.jpg')"
+                      "_Mini_" +
+                      traduction[this.state.language]["LANG"] +
+                      ".jpg')"
                   }}
                 ></button>
               </td>
